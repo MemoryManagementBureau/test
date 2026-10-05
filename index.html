@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>好劲水 · 测测你是哪种口味</title>
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #0b0b0d;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 16px 16px;
+    background-image: radial-gradient(circle at 50% -20%, #3a1505 0%, #0b0b0d 60%);
+    overflow-x: hidden;
+  }
+
+  /* 顶部官方账号 */
+  .top-account {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background: rgba(11, 11, 13, 0.9);
+    color: #ff7a30;
+    font-size: 13px;
+    padding: 10px 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,122,48,0.3);
+    letter-spacing: 1px;
+  }
+
+  /* 背景漂浮 emoji */
+  .floaters { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .floaters span {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0.15;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    from { transform: translateY(110vh) rotate(0deg); }
+    to   { transform: translateY(-20vh) rotate(360deg); }
+  }
+
+  .app {
+    width: 100%;
+    max-width: 440px;
+    background: #1a1a1e;
+    border: 1px solid #2a2a30;
+    border-radius: 24px;
+    padding: 24px 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .screen { display: none; animation: pop .3s ease both; }
+  .screen.active { display: block; }
+  @keyframes pop {
+    from { opacity: 0; transform: translateY(10px) scale(.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* 开始页 */
+  .hero { text-align: center; padding: 10px 0; }
+  .hero h1 { font-size: 24px; color: #ff7a30; margin: 0 0 8px; letter-spacing: 2px; }
+  .hero p { color: #888; font-size: 13px; line-height: 1.8; margin: 0 0 24px; }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,122,48,0.15);
+    color: #ff7a30;
+    border: 1px solid rgba(255,122,48,0.3);
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border: 0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #ff9a44, #ff5e00);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: inherit;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: .2s;
+    box-shadow: 0 8px 24px rgba(255,94,0,0.3);
+  }
+  .btn:active { transform: scale(.97); }
+
+  /* 答题页 */
+  .progress-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .progress-track { flex: 1; height: 6px; background: #2a2a30; border-radius: 99px; overflow: hidden; }
+  .progress-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #ff9a44, #ff5e00);
+    border-radius: 99px; transition: width .3s ease;
+  }
+  .progress-num { font-size: 12px; color: #666; min-width: 40px; text-align: right; }
+
+  .q-text { font-size: 18px; font-weight: 700; line-height: 1.6; margin: 0 0 18px; color: #eee; }
+
+  .option {
+    display: block; width: 100%; text-align: left;
+    padding: 14px 16px; margin: 10px 0;
+    border-radius: 12px;
+    background: #232328; border: 1px solid #2e2e35;
+    color: #ccc; font-size: 14.5px; line-height: 1.5;
+    font-family: inherit; cursor: pointer; transition: .15s;
+  }
+  .option:active { background: #2e2e35; border-color: #ff7a30; color: #fff; transform: scale(.98); }
+  .option.picked { background: rgba(255,122,48,0.15); border-color: #ff7a30; color: #fff; }
+
+  /* 结果页 */
+  .result-header { text-align: center; margin-bottom: 20px; }
+  .result-emoji {
+    font-size: 64px; line-height: 1; margin-bottom: 12px;
+    animation: bounceIn .5s cubic-bezier(.2,1.5,.5,1) both;
+  }
+  @keyframes bounceIn {
+    0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+  }
+  .result-name { font-size: 24px; font-weight: 800; color: #ff7a30; margin-bottom: 6px; }
+  .result-tag {
+    font-size: 13px; color: #888; background: #232328;
+    display: inline-block; padding: 4px 14px; border-radius: 99px;
+  }
+  .result-desc {
+    background: #232328; border-left: 3px solid #ff7a30;
+    border-radius: 0 12px 12px 0; padding: 16px;
+    font-size: 14px; line-height: 1.8; color: #bbb; margin: 20px 0;
+  }
+
+  /* 评论区 */
+  .comments { margin: 16px 0; }
+  .comments-title {
+    font-size: 12px; color: #666; letter-spacing: 2px; margin-bottom: 10px;
+  }
+  .comment {
+    display: flex; gap: 10px;
+    padding: 10px 12px; background: #232328;
+    border-radius: 12px; margin-bottom: 8px;
+    font-size: 13px; line-height: 1.6;
+    animation: pop .3s ease both;
+  }
+  .comment .c-emoji { flex-shrink: 0; font-size: 16px; }
+  .comment .c-text { color: #bbb; }
+
+  /* 灼石彩蛋专属 */
+  .egg-box {
+    background: #111;
+    border: 1px dashed #555;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px 0;
+    text-align: center;
+    display: none;
+  }
+  .egg-box.show { display: block; animation: pop .5s ease both; }
+  .egg-box p {
+    margin: 6px 0; font-size: 14px; color: #aaa; font-family: monospace;
+  }
+  .egg-box p span { color: #ff7a30; }
+
+  /* 结果进度条 */
+  .bars-title {
+    font-size: 12px; color: #666; letter-spacing: 2px; margin-bottom: 10px;
+  }
+  .bar-row {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 8px; font-size: 12px;
+  }
+  .bar-label { width: 72px; flex-shrink: 0; color: #999; }
+  .bar-track { flex: 1; height: 8px; background: #2a2a30; border-radius: 99px; overflow: hidden; }
+  .bar-fill { height: 100%; width: 0; border-radius: 99px; transition: width .8s cubic-bezier(.2,.9,.3,1); }
+  .bar-pct {
+    width: 34px; text-align: right; color: #666;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .actions { display: flex; gap: 10px; margin-top: 24px; }
+  .btn-ghost {
+    flex: 1; padding: 14px; border-radius: 12px;
+    border: 1px solid #333; background: transparent;
+    color: #aaa; font-size: 14px; font-family: inherit; cursor: pointer;
+  }
+  .btn-ghost:active { background: #232328; }
+</style>
+</head>
+<body>
+
+<div class="top-account">好劲水品牌官方账号: 3983349930</div>
+
+<div class="floaters" id="floaters"></div>
+
+<div class="app">
+
+  <!-- 开始页 -->
+  <div class="screen active" id="start-screen">
+    <div class="hero">
+      <div class="hero-tag">🍊 1元/份 · 每人限购5份</div>
+      <h1>测测你是哪种好劲水</h1>
+      <p>
+        一瓶只要1块钱，好兄弟一起喝，超劲！<br>
+        7种口味，测出你灵魂的气泡水味道。<br>
+        <span style="color:#555">（温馨提示：喝前摇一摇，可能会喷）</span>
+      </p>
+    </div>
+    <button class="btn" id="start-btn">开 始 测 试</button>
+  </div>
+
+  <!-- 答题页 -->
+  <div class="screen" id="quiz-screen">
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-num" id="progress-num">1 / 8</div>
+    </div>
+    <h2 class="q-text" id="q-text"></h2>
+    <div id="options"></div>
+  </div>
+
+  <!-- 结果页 -->
+  <div class="screen" id="result-screen">
+    <div class="result-header">
+      <div class="result-emoji" id="r-emoji">🍊</div>
+      <div class="result-name" id="r-name"></div>
+      <div class="result-tag" id="r-tag"></div>
+    </div>
+    <p class="result-desc" id="r-desc"></p>
+
+    <!-- 普通口味评论区 -->
+    <div class="comments" id="comments">
+      <div class="comments-title">大 家 都 说</div>
+      <div id="comment-list"></div>
+    </div>
+
+    <!-- 灼石彩蛋专属 -->
+    <div class="egg-box" id="egg-box">
+      <p><span>♟️</span> 这又是哪里冒出来的？？？</p>
+      <p><span>👑</span> 遗忘是件好事</p>
+    </div>
+
+    <div class="bars-title">灵 魂 成 分 表</div>
+    <div id="bars"></div>
+
+    <div class="actions">
+      <button class="btn-ghost" id="again-btn">再测一次</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ============ 口味设定 ============ */
+const TYPES = {
+  peach: {
+    emoji: '🍑',
+    name: '桃子味',
+    tag: '粉嘟嘟的软糖精',
+    color: '#ff9eb5',
+    desc: '你是一瓶行走的桃子汽水。看见小猫会"嘤"，看见小狗会"嘤嘤"。你的存在就是在给这个世界加甜味剂。不过有时候甜过头了，别人会怀疑你是不是加了糖精。',
+    comments: [
+      { e: '❤️', t: '哇哇哇！桃子味！我最喜欢桃子味了！甜甜的，像在喝粉色的云朵～' },
+      { e: '☁️', t: '桃子味口感柔和，甜度适中，包装完好，已列入本月采购清单。' },
+      { e: '♟️', t: '桃子味啊……还行吧。喝完继续躺着，反正也没差。' },
+      { e: '⚡', t: '桃子！我喝了三瓶！然后我发现我拿的是别人的瓶子，那人在看我。' }
+    ]
+  },
+  blueberry: {
+    emoji: '🫐',
+    name: '蓝莓味',
+    tag: '忧郁的紫色气泡',
+    color: '#6b8cff',
+    desc: '你的气质是冷的，心是紫的。你话不多，但每一句都能把人噎住。你喝好劲水从来不加冰，因为你觉得自己的内心已经够凉了。',
+    comments: [
+      { e: '❤️', t: '蓝莓味好有气质呀！喝的时候感觉自己像在拍文艺片～' },
+      { e: '☁️', t: '蓝莓味花青素含量较高，对眼睛有一定好处，建议每天一瓶。' },
+      { e: '♟️', t: '蓝莓味，紫色的。喝完了，瓶子扔了，然后呢？没有然后。' },
+      { e: '⚡', t: '蓝莓是蓝的吗？我以为是紫色的……等等，我色盲吗？' }
+    ]
+  },
+  grape: {
+    emoji: '🍇',
+    name: '葡萄味',
+    tag: '聚会里最先被顺走的那瓶',
+    color: '#a855f7',
+    desc: '你很圆滑，很合群，很普通，但你就是聚会上最不能缺的那一瓶。你可能不是最抢眼的，但最后大家发现，还是你最好喝。',
+    comments: [
+      { e: '❤️', t: '葡萄味圆圆的，像一颗颗小弹珠，好可爱呀！' },
+      { e: '☁️', t: '葡萄味口感均衡，酸甜适中，适合聚会分享，已推荐给部门同事。' },
+      { e: '♟️', t: '葡萄味，滚来滚去，跟我一样不想上班。喝完继续摸鱼。' },
+      { e: '⚡', t: '葡萄！我最喜欢葡萄了！等等，这是葡萄还是蓝莓来着？' }
+    ]
+  },
+  apple: {
+    emoji: '🍏',
+    name: '青苹果味',
+    tag: '酸到皱眉但很上头',
+    color: '#4ade80',
+    desc: '你是一瓶酸涩的气泡水。你元气满满，但经常因为用力过猛而把自己酸到。你的生活态度是：虽然会皱眉，但还是要一口闷。',
+    comments: [
+      { e: '❤️', t: '青苹果味酸酸的，喝完感觉整个人都醒过来了！' },
+      { e: '☁️', t: '青苹果味酸度偏高，肠胃敏感者建议饭后饮用，已备注在案。' },
+      { e: '♟️', t: '青苹果味，酸得我脸都皱了。不过还行，喝完继续躺。' },
+      { e: '⚡', t: '我喝了一口，然后我的脸变成了一个表情包，我妈问我怎么了。' }
+    ]
+  },
+  orange: {
+    emoji: '🍊',
+    name: '桔子味',
+    tag: '就是普通桔子味，你被骗了',
+    color: '#ff7a30',
+    desc: '你是一个实在人。你不整那些花里胡哨的，你就是普通的桔子味。有人评价你"就是普通桔子味汽水，哪来的好劲？"——你说得对，1块钱你还想要什么自行车。',
+    comments: [
+      { e: '❤️', t: '桔子味是经典呀！就是那种小时候的味道，好怀念～' },
+      { e: '☁️', t: '桔子味性价比最高，1块钱，朴实无华，已推荐给全部门采购。' },
+      { e: '♟️', t: '桔子味，就是普通的桔子味。1块钱的东西，别指望太多。' },
+      { e: '⚡', t: '桔子味！我喝了一口，感觉像喝了一口桔子味的水！好神奇！' }
+    ]
+  },
+  hotpot: {
+    emoji: '🌶️',
+    name: '川味火锅味',
+    tag: '喝一口直接喷火',
+    color: '#ef4444',
+    desc: '你是一瓶极度危险的饮料。你热情、奔放、不讲道理，好兄弟喝了你直接当场喷火。建议搭配灭火器食用，或者别喝。',
+    comments: [
+      { e: '❤️', t: '川味火锅味好辣呀！喝完脸都红了，但是好爽好爽！' },
+      { e: '☁️', t: '川味火锅味刺激性较强，建议搭配灭火器使用，已报备消防部门。' },
+      { e: '♟️', t: '川味火锅味，喝了一口，我的人生又多了一件后悔的事。' },
+      { e: '⚡', t: '我喝了川味火锅味！然后我喷火了！然后我忘了我在哪了！' }
+    ]
+  },
+  stone: {
+    emoji: '🌑',
+    name: '灼石味',
+    tag: '？？？',
+    color: '#555555',
+    desc: '这瓶饮料不该出现在这里。它的包装是黑色的，上面什么也没写。你喝了它，然后你忘记了它是什么味道，甚至忘记了你是谁。',
+    comments: []
+  }
+};
+
+/* ============ 题库 ============ */
+const questions = [
+  {
+    q: '早上醒来，你发现自己变成了一瓶好劲水。你希望是？',
+    options: [
+      { t: '粉嘟嘟水蜜桃，一开口就冒粉红泡泡', k: 'peach' },
+      { t: '忧郁深紫色蓝莓，看谁都像欠你钱', k: 'blueberry' },
+      { t: '圆溜溜的葡萄，滚到哪里都能混', k: 'grape' },
+      { t: '酸到皱眉的青苹果，一口下去整个人都醒了', k: 'apple' },
+      { t: '经典老字号桔子，朴实无华且1块钱', k: 'orange' },
+      { t: '沸腾的红油火锅，喝一口直接喷火', k: 'hotpot' }
+    ]
+  },
+  {
+    q: '好兄弟喝完一瓶好劲水，说"不够劲"。你会？',
+    options: [
+      { t: '再给他开一瓶桃子的，让他甜死', k: 'peach' },
+      { t: '用蓝莓味的眼神冷冷看他一眼', k: 'blueberry' },
+      { t: '叫上一群兄弟，把葡萄味的都开了', k: 'grape' },
+      { t: '直接对瓶吹，说"这才叫劲！"', k: 'apple' },
+      { t: '告诉他"这就是普通桔子味，你被骗了"', k: 'orange' },
+      { t: '往里面加朝天椒，让他知道什么叫劲', k: 'hotpot' }
+    ]
+  },
+  {
+    q: '你喝下好劲水，打了个嗝。这个嗝的声音是？',
+    options: [
+      { t: '"啾~"', k: 'peach' },
+      { t: '没有声音，因为酷的人不打嗝', k: 'blueberry' },
+      { t: '"嗝~~~~~~~~"（很长的普通嗝）', k: 'grape' },
+      { t: '"咳咳咳！"（酸到呛住）', k: 'apple' },
+      { t: '"嗝。"（很标准的桔子味嗝）', k: 'orange' },
+      { t: '喷出三米火焰', k: 'hotpot' }
+    ]
+  },
+  {
+    q: '你看到一条评价："不知道为什么会是燃烧秸秆味，不难喝。" 你会？',
+    options: [
+      { t: '觉得他好可怜，想抱抱他', k: 'peach' },
+      { t: '觉得他是个哲学家，陷入了沉思', k: 'blueberry' },
+      { t: '反手就是一个赞，然后自己也买一瓶', k: 'grape' },
+      { t: '骂他骗子，明明就是普通桔子味', k: 'apple' },
+      { t: '表示理解，毕竟一分钱一分货', k: 'orange' },
+      { t: '写下更夸张的评测："喝完我看见了宇宙"', k: 'hotpot' }
+    ]
+  },
+  {
+    q: '如果货架最底层出现了一瓶黑色的、写着"???"的饮料，你会？',
+    options: [
+      { t: '不敢碰，叫老板来', k: 'peach' },
+      { t: '拿起来摇一摇，听声音', k: 'blueberry' },
+      { t: '问旁边的人："这啥？你喝过吗？"', k: 'grape' },
+      { t: '直接买下，管它是什么', k: 'apple' },
+      { t: '看保质期，确认合法合规再买', k: 'orange' },
+      { t: '一口闷', k: 'hotpot' },
+      { t: '一口闷，然后忘了自己在哪里，忘了自己是谁。', k: 'stone' }
+    ]
+  },
+  {
+    q: '好劲水限购5份，你只能买5瓶。你怎么分配口味？',
+    options: [
+      { t: '5瓶全买桃子，因为可爱', k: 'peach' },
+      { t: '买1瓶蓝莓，其他4瓶随便', k: 'blueberry' },
+      { t: '每样来一瓶，凑个全家福', k: 'grape' },
+      { t: '5瓶全买青苹果，酸死自己', k: 'apple' },
+      { t: '5瓶全买桔子，因为性价比最高', k: 'orange' },
+      { t: '5瓶全买川味火锅，用来防身', k: 'hotpot' }
+    ]
+  },
+  {
+    q: '你在深夜emo，打开一瓶好劲水。你希望它是什么味道？',
+    options: [
+      { t: '桃子味，甜到能忘记一切烦恼', k: 'peach' },
+      { t: '蓝莓味，忧郁的紫色能懂我', k: 'blueberry' },
+      { t: '葡萄味，酸酸甜甜像初恋', k: 'grape' },
+      { t: '青苹果味，酸到流泪，就当哭过了', k: 'apple' },
+      { t: '桔子味，平平淡淡才是真', k: 'orange' },
+      { t: '川味火锅味，辣到没空emo', k: 'hotpot' }
+    ]
+  },
+  {
+    q: '现在，请诚实地面对自己：你喝完这瓶好劲水后，最可能发生的事情是？',
+    options: [
+      { t: '变成一只粉色泡泡，飘走了', k: 'peach' },
+      { t: '陷入沉默，望着远方发呆', k: 'blueberry' },
+      { t: '打了个嗝，然后继续刷手机', k: 'grape' },
+      { t: '精神抖擞，准备去跑马拉松', k: 'apple' },
+      { t: '觉得花1块钱买这瓶水，挺值的', k: 'orange' },
+      { t: '喷火，然后被消防队带走', k: 'hotpot' },
+      { t: '你看着空瓶，脑海中一片空白。你不记得水是什么味道，不记得自己是谁，也不记得刚才发生了什么。', k: 'stone' }
+    ]
+  }
+];
+
+/* ============ 状态 ============ */
+let idx = 0;
+const scores = { peach: 0, blueberry: 0, grape: 0, apple: 0, orange: 0, hotpot: 0, stone: 0 };
+
+/* ============ 元素 ============ */
+const startScreen  = document.getElementById('start-screen');
+const quizScreen   = document.getElementById('quiz-screen');
+const resultScreen = document.getElementById('result-screen');
+const progressFill = document.getElementById('progress-fill');
+const progressNum  = document.getElementById('progress-num');
+const qText        = document.getElementById('q-text');
+const optionsEl    = document.getElementById('options');
+const eggBox       = document.getElementById('egg-box');
+const commentsBox  = document.getElementById('comments');
+const commentList  = document.getElementById('comment-list');
+
+/* ============ 屏幕切换 ============ */
+function showScreen(el) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  el.style.animation = 'none';
+  void el.offsetWidth;
+  el.style.animation = '';
+}
+
+/* ============ 渲染题目 ============ */
+function renderQuestion() {
+  const q = questions[idx];
+  progressFill.style.width = ((idx) / questions.length * 100) + '%';
+  progressNum.textContent = (idx + 1) + ' / ' + questions.length;
+  qText.textContent = q.q;
+  optionsEl.innerHTML = '';
+
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.textContent = opt.t;
+    btn.onclick = () => choose(opt.k, btn);
+    optionsEl.appendChild(btn);
+  });
+}
+
+/* ============ 选择答案 ============ */
+let locked = false;
+function choose(key, btn) {
+  if (locked) return;
+  locked = true;
+
+  scores[key]++;
+  btn.classList.add('picked');
+  optionsEl.querySelectorAll('.option').forEach(b => b.disabled = true);
+  progressFill.style.width = ((idx + 1) / questions.length * 100) + '%';
+
+  setTimeout(() => {
+    idx++;
+    locked = false;
+    if (idx < questions.length) {
+      renderQuestion();
+      quizScreen.style.animation = 'none';
+      void quizScreen.offsetWidth;
+      quizScreen.style.animation = '';
+    } else {
+      showResult();
+    }
+  }, 340);
+}
+
+/* ============ 结果 ============ */
+function showResult() {
+  const keys = ['peach', 'blueberry', 'grape', 'apple', 'orange', 'hotpot'];
+  const max = Math.max(...keys.map(k => scores[k]));
+  const top = keys.filter(k => scores[k] === max);
+
+  // 灼石彩蛋：只有当灼石得分严格高于所有普通口味时才触发
+  const stoneScore = scores.stone;
+  let winner;
+  if (stoneScore > max) {
+    winner = 'stone';
+  } else {
+    winner = top[Math.floor(Math.random() * top.length)];
+  }
+
+  const data = TYPES[winner];
+
+  document.getElementById('r-emoji').textContent = data.emoji;
+  document.getElementById('r-name').textContent = data.name;
+  document.getElementById('r-tag').textContent = '「 ' + data.tag + ' 」';
+  document.getElementById('r-desc').textContent = data.desc;
+
+  // 灼石彩蛋
+  if (winner === 'stone') {
+    eggBox.classList.add('show');
+    commentsBox.style.display = 'none';
+  } else {
+    eggBox.classList.remove('show');
+    commentsBox.style.display = 'block';
+    renderComments(data.comments);
+  }
+
+  // 成分条（不包含 stone）
+  renderBars(keys);
+
+  showScreen(resultScreen);
+}
+
+/* ============ 渲染评论 ============ */
+function renderComments(comments) {
+  commentList.innerHTML = '';
+  comments.forEach((c, i) => {
+    const div = document.createElement('div');
+    div.className = 'comment';
+    div.style.animationDelay = (i * 0.08) + 's';
+    div.innerHTML = '<span class="c-emoji">' + c.e + '</span><span class="c-text">' + c.t + '</span>';
+    commentList.appendChild(div);
+  });
+}
+
+/* ============ 渲染成分条 ============ */
+function renderBars(keys) {
+  const barsEl = document.getElementById('bars');
+  barsEl.innerHTML = '';
+
+  keys.forEach(k => {
+    const t = TYPES[k];
+    const pct = Math.round(scores[k] / questions.length * 100);
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML =
+      '<span class="bar-label">' + t.emoji + ' ' + t.name + '</span>' +
+      '<div class="bar-track"><div class="bar-fill" data-w="' + pct + '" ' +
+      'style="background:' + t.color + '"></div></div>' +
+      '<span class="bar-pct">' + pct + '%</span>';
+    barsEl.appendChild(row);
+  });
+
+  setTimeout(() => {
+    barsEl.querySelectorAll('.bar-fill').forEach(el => {
+      el.style.width = el.dataset.w + '%';
+    });
+  }, 120);
+}
+
+/* ============ 重置 ============ */
+function reset() {
+  idx = 0;
+  locked = false;
+  Object.keys(scores).forEach(k => scores[k] = 0);
+  progressFill.style.width = '0%';
+  eggBox.classList.remove('show');
+  commentsBox.style.display = 'block';
+  commentList.innerHTML = '';
+  showScreen(startScreen);
+}
+
+/* ============ 事件绑定 ============ */
+document.getElementById('start-btn').onclick = () => {
+  reset();
+  renderQuestion();
+  showScreen(quizScreen);
+};
+document.getElementById('again-btn').onclick = reset;
+
+/* ============ 背景漂浮 emoji ============ */
+(function makeFloaters() {
+  const box = document.getElementById('floaters');
+  const emojis = ['❤️', '♟️', '⚡', '☁️'];
+  for (let i = 0; i < 24; i++) {
+    const s = document.createElement('span');
+    s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    s.style.left = Math.random() * 100 + '%';
+    s.style.fontSize = (16 + Math.random() * 24) + 'px';
+    s.style.animationDuration = (12 + Math.random() * 18) + 's';
+    s.style.animationDelay = (-Math.random() * 30) + 's';
+    box.appendChild(s);
+  }
+})();
+</script>
+</body>
+</html>
