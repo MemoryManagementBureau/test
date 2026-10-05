@@ -8,14 +8,10 @@
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
   body {
-    margin: 0;
-    min-height: 100vh;
+    margin: 0; min-height: 100vh;
     font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: #0b0b0d;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: #0b0b0d; color: #fff;
+    display: flex; align-items: center; justify-content: center;
     padding: 50px 16px 16px;
     background-image: radial-gradient(circle at 50% -20%, #3a1505 0%, #0b0b0d 60%);
     overflow-x: hidden;
@@ -24,21 +20,16 @@
   .top-account {
     position: fixed; top: 0; left: 0; width: 100%;
     text-align: center;
-    background: rgba(11, 11, 13, 0.9);
-    color: #ff7a30;
-    font-size: 13px;
-    padding: 10px 0;
-    z-index: 100;
-    backdrop-filter: blur(8px);
+    background: rgba(11, 11, 13, 0.9); color: #ff7a30;
+    font-size: 13px; padding: 10px 0;
+    z-index: 100; backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(255,122,48,0.3);
     letter-spacing: 1px;
   }
 
   .floaters { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
   .floaters span {
-    position: absolute;
-    font-size: 24px;
-    opacity: 0.15;
+    position: absolute; font-size: 24px; opacity: 0.15;
     animation: floatUp linear infinite;
   }
   @keyframes floatUp {
@@ -48,10 +39,8 @@
 
   .app {
     width: 100%; max-width: 440px;
-    background: #1a1a1e;
-    border: 1px solid #2a2a30;
-    border-radius: 24px;
-    padding: 24px 20px;
+    background: #1a1a1e; border: 1px solid #2a2a30;
+    border-radius: 24px; padding: 24px 20px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.8);
     position: relative; z-index: 1; overflow: hidden;
   }
@@ -68,8 +57,7 @@
   .hero p { color: #888; font-size: 13px; line-height: 1.8; margin: 0 0 24px; }
   .hero-tag {
     display: inline-block;
-    background: rgba(255,122,48,0.15);
-    color: #ff7a30;
+    background: rgba(255,122,48,0.15); color: #ff7a30;
     border: 1px solid rgba(255,122,48,0.3);
     padding: 4px 12px; border-radius: 99px;
     font-size: 12px; margin-bottom: 16px;
@@ -170,13 +158,8 @@
   .comment .c-emoji { flex-shrink: 0; font-size: 16px; }
   .comment .c-text { color: #bbb; }
 
-  .bars-title {
-    font-size: 12px; color: #666; letter-spacing: 2px; margin-bottom: 10px;
-  }
-  .bar-row {
-    display: flex; align-items: center; gap: 8px;
-    margin-bottom: 8px; font-size: 12px;
-  }
+  .bars-title { font-size: 12px; color: #666; letter-spacing: 2px; margin-bottom: 10px; }
+  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 12px; }
   .bar-label { width: 72px; flex-shrink: 0; color: #999; }
   .bar-track { flex: 1; height: 8px; background: #2a2a30; border-radius: 99px; overflow: hidden; }
   .bar-fill { height: 100%; width: 0; border-radius: 99px; transition: width .8s cubic-bezier(.2,.9,.3,1); }
@@ -190,29 +173,31 @@
   }
   .btn-ghost:active { background: #232328; }
 
+  /* ============ 特效层（专门装飞行元素和气泡） ============ */
+  #egg-fx-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+  }
+
   /* ============ 灼石弹窗 ============ */
   .egg-overlay {
     position: fixed; inset: 0;
     background: rgba(0,0,0,0.88);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     z-index: 999;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity .35s ease;
-    padding: 20px;
-    overflow: hidden;
+    display: none; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity .35s ease;
+    padding: 20px; overflow: hidden;
   }
   .egg-overlay.show { opacity: 1; }
 
   .egg-chat {
     width: 100%; max-width: 360px;
-    background: #1e1e24;
-    border: 1px solid #333;
-    border-radius: 18px;
-    padding: 18px;
+    background: #1e1e24; border: 1px solid #333;
+    border-radius: 18px; padding: 18px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.9);
     position: relative; z-index: 1001;
   }
@@ -228,21 +213,19 @@
     display: flex; gap: 8px;
     padding: 8px 12px; background: #2a2a32;
     border-radius: 12px;
-    font-size: 13.5px; line-height: 1.55;
-    color: #ddd; max-width: 92%; align-self: flex-start;
+    font-size: 13.5px; line-height: 1.55; color: #ddd;
+    max-width: 92%; align-self: flex-start;
     animation: msgIn .35s cubic-bezier(.2,1.5,.5,1) both;
   }
   .egg-msg .m-emoji { flex-shrink: 0; }
   .egg-msg .m-text { color: #ddd; }
-
   @keyframes msgIn {
     0% { opacity: 0; transform: translateY(12px) scale(.85); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
   }
 
   .egg-hint {
-    margin-top: 14px;
-    font-size: 11px; color: #555;
+    margin-top: 14px; font-size: 11px; color: #555;
     text-align: center; letter-spacing: 1px;
     opacity: 0; transition: opacity .5s;
   }
@@ -255,50 +238,37 @@
   }
 
   .flyer {
-    position: fixed;
+    position: absolute;
     left: 50%; top: 42%;
     font-size: 58px; line-height: 1;
     opacity: 0; pointer-events: none;
-    z-index: 1000;
     transform: translate(-50%, -50%);
     will-change: transform, left, top, opacity, font-size;
   }
 
-  /* 对话气泡 */
   .speech-bubble {
-    position: fixed;
-    background: #2a2a32;
-    color: #fff;
-    padding: 10px 16px;
-    border-radius: 14px;
-    font-size: 14px;
-    border: 1px solid #ff7a30;
+    position: absolute;
+    background: #2a2a32; color: #fff;
+    padding: 10px 16px; border-radius: 14px;
+    font-size: 14px; border: 1px solid #ff7a30;
     box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-    z-index: 1003;
     pointer-events: none;
-    white-space: nowrap;
-    opacity: 0;
+    white-space: nowrap; opacity: 0;
     transform: translate(-50%, -100%) scale(0.8);
     transition: opacity .3s ease, transform .3s cubic-bezier(.2,1.5,.5,1);
   }
-  .speech-bubble.show {
-    opacity: 1;
-    transform: translate(-50%, -100%) scale(1);
-  }
+  .speech-bubble.show { opacity: 1; transform: translate(-50%, -100%) scale(1); }
   .speech-bubble::after {
     content: '';
     position: absolute;
-    bottom: -8px;
-    left: 24px;
+    bottom: -8px; left: 24px;
     width: 0; height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 8px solid #ff7a30;
   }
 
-  .egg-overlay.shake .egg-chat {
-    animation: shakeIt .3s ease;
-  }
+  .egg-overlay.shake .egg-chat { animation: shakeIt .3s ease; }
   @keyframes shakeIt {
     0%,100% { transform: translate(0, 0) rotate(0); }
     20% { transform: translate(-6px, 4px) rotate(-1deg); }
@@ -307,33 +277,22 @@
     80% { transform: translate(5px, 3px) rotate(1deg); }
   }
 
-  /* ============ 虚空诡题 + 黑洞 ============ */
   .void-overlay {
     position: fixed; inset: 0;
     background: radial-gradient(circle at 50% 50%, #120018 0%, #000 70%);
-    z-index: 2000;
-    display: none;
+    z-index: 2000; display: none;
     align-items: center; justify-content: center;
     overflow: hidden;
   }
   .void-overlay.active { display: flex; }
 
   .void-question {
-    position: relative;
-    z-index: 2;
+    position: relative; z-index: 2;
     font-family: 'Courier New', 'Menlo', monospace;
-    font-size: 21px;
-    color: #a01818;
-    text-shadow:
-      0 0 8px #ff0000,
-      0 0 18px #7a0000,
-      0 0 30px #4a0000;
-    letter-spacing: 3px;
-    line-height: 2.4;
-    text-align: center;
-    padding: 0 24px;
-    max-width: 90%;
-    word-break: break-all;
+    font-size: 21px; color: #a01818;
+    text-shadow: 0 0 8px #ff0000, 0 0 18px #7a0000, 0 0 30px #4a0000;
+    letter-spacing: 3px; line-height: 2.4; text-align: center;
+    padding: 0 24px; max-width: 90%; word-break: break-all;
     animation: voidFlicker 0.12s infinite;
     user-select: none;
   }
@@ -348,30 +307,22 @@
   }
 
   .blackhole {
-    position: absolute;
-    left: 50%; top: 50%;
-    width: 10px; height: 10px;
-    border-radius: 50%;
+    position: absolute; left: 50%; top: 50%;
+    width: 10px; height: 10px; border-radius: 50%;
     transform: translate(-50%, -50%);
     background: radial-gradient(circle,
-      #000 0%,
-      #000 28%,
+      #000 0%, #000 28%,
       rgba(18,0,38,0.98) 45%,
       rgba(60,0,110,0.75) 62%,
       rgba(130,0,200,0.35) 80%,
       rgba(190,80,255,0) 100%);
-    box-shadow:
-      0 0 60px 30px rgba(0,0,0,1),
-      0 0 120px 60px rgba(80,0,140,0.35),
-      inset 0 0 40px rgba(140,0,220,0.6);
-    z-index: 3;
-    pointer-events: none;
-    opacity: 0;
+    box-shadow: 0 0 60px 30px rgba(0,0,0,1),
+                0 0 120px 60px rgba(80,0,140,0.35),
+                inset 0 0 40px rgba(140,0,220,0.6);
+    z-index: 3; pointer-events: none; opacity: 0;
     will-change: width, height, opacity;
   }
-  .blackhole.grow {
-    animation: holeGrow 3.4s cubic-bezier(.45,.05,.7,1) forwards;
-  }
+  .blackhole.grow { animation: holeGrow 3.4s cubic-bezier(.45,.05,.7,1) forwards; }
   @keyframes holeGrow {
     0%   { width: 10px;  height: 10px;  opacity: 0; }
     8%   { width: 30px;  height: 30px;  opacity: 1; }
@@ -385,14 +336,13 @@
 <body>
 
 <div class="top-account">好劲水品牌官方账号: 3983349930</div>
-
 <div class="floaters" id="floaters"></div>
 
 <div class="app">
 
   <div class="screen active" id="start-screen">
     <div class="hero">
-      <div class="hero-tag">🍊 1元/份 · 每人限购5份</div>
+      <div class="hero-tag">1元/份 · 每人限购5份</div>
       <h1>测测你是哪种好劲水</h1>
       <p>
         一瓶只要1块钱，好兄弟一起喝，超劲！<br>
@@ -419,15 +369,12 @@
       <div class="result-tag" id="r-tag"></div>
     </div>
     <p class="result-desc" id="r-desc"></p>
-
     <div class="comments" id="comments">
       <div class="comments-title">员 工 评 价</div>
       <div id="comment-list"></div>
     </div>
-
     <div class="bars-title">灵 魂 成 分 表</div>
     <div id="bars"></div>
-
     <div class="actions">
       <button class="btn-ghost" id="again-btn">再测一次</button>
     </div>
@@ -435,7 +382,6 @@
 
 </div>
 
-<!-- 灼石弹窗 -->
 <div class="egg-overlay" id="egg-overlay">
   <div class="egg-chat" id="egg-chat">
     <div class="egg-chat-title">好 劲 水 · 内 部 群 聊</div>
@@ -444,18 +390,20 @@
   </div>
 </div>
 
-<!-- 虚空诡题 + 黑洞 -->
+<!-- 专门的特效层，所有飞行元素和气泡都塞这里 -->
+<div id="egg-fx-layer"></div>
+
 <div class="void-overlay" id="void-overlay">
-  <div class="void-question" id="void-question">你​̪̩̟̋́̍̚想​̢̨̣̼̲̟̃要​̡̭̜̺̽̋͂回​̵͍̭͉̆̕̕到​̵̡͚̟̗̽̏2​̡͈̙̖̊̆́0​̷̡̲̙̪̃͢1​̟̘̱̎̀̿̍3​̵͚͓̲̺͉̺年​̪̭̽̔̍̽͟吗。</div>
+  <div class="void-question" id="void-question">你想回到2013年吗。</div>
   <div class="blackhole" id="blackhole"></div>
 </div>
 
 <script>
 /* ============ 口味设定 ============ */
-const TYPES = {
+var TYPES = {
   peach: {
     emoji: '🍑', name: '桃子味', tag: '粉嘟嘟的软糖精', color: '#ff9eb5',
-    desc: '你是一瓶行走的桃子汽水。看见小猫会“嘤”，看见小狗会“嘤嘤”。你的存在就是在给这个世界加甜味剂。不过有时候甜过头了，别人会怀疑你是不是加了糖精。',
+    desc: '你是一瓶行走的桃子汽水。看见小猫会嘤，看见小狗会嘤嘤。你的存在就是在给这个世界加甜味剂。不过有时候甜过头了，别人会怀疑你是不是加了糖精。',
     comments: [
       { e: '❤️', t: '哇哇哇！桃子味！我最喜欢桃子味了！甜甜的，像在喝粉色的云朵～' },
       { e: '☁️', t: '桃子味口感柔和，甜度适中，包装完好，已列入本月采购清单。' },
@@ -495,7 +443,7 @@ const TYPES = {
   },
   orange: {
     emoji: '🍊', name: '桔子味', tag: '就是普通桔子味，你被骗了', color: '#ff7a30',
-    desc: '你是一个实在人。你不整那些花里胡哨的，你就是普通的桔子味。有人评价你“就是普通桔子味汽水，哪来的好劲？”——你说得对，1块钱你还想要什么自行车。',
+    desc: '你是一个实在人。你不整那些花里胡哨的，你就是普通的桔子味。有人评价你就是普通桔子味汽水，哪来的好劲。你说得对，1块钱你还想要什么自行车。',
     comments: [
       { e: '❤️', t: '桔子味是经典呀！就是那种小时候的味道，好怀念～' },
       { e: '☁️', t: '桔子味性价比最高，1块钱，朴实无华，已推荐给全部门采购。' },
@@ -521,15 +469,15 @@ const TYPES = {
 };
 
 /* ============ 题库 ============ */
-const questions = [
+var questions = [
   {
     q: '朋友发来一条 60 秒语音方阵，你的第一反应是？',
     options: [
       { t: '点开，一边听一边露出姨母笑', k: 'peach' },
       { t: '转文字，看完冷笑一声', k: 'blueberry' },
       { t: '先回个表情包，然后等会儿再听', k: 'grape' },
-      { t: '直接打电话过去问“什么事？”', k: 'apple' },
-      { t: '回“好的”，然后没听', k: 'orange' },
+      { t: '直接打电话过去问什么事', k: 'apple' },
+      { t: '回好的，然后没听', k: 'orange' },
       { t: '发语音回去，比他还长', k: 'hotpot' },
       { t: '点开听了，但听完忘了是谁发的', k: 'stone' }
     ]
@@ -539,20 +487,20 @@ const questions = [
     options: [
       { t: '发个可爱的表情包缓解尴尬', k: 'peach' },
       { t: '默默撤回，当无事发生', k: 'blueberry' },
-      { t: '再发一条“有人吗？”', k: 'grape' },
+      { t: '再发一条有人吗', k: 'grape' },
       { t: '直接 @所有人', k: 'apple' },
       { t: '无所谓，反正也没人找我', k: 'orange' },
       { t: '开始刷屏，直到有人理我', k: 'hotpot' }
     ]
   },
   {
-    q: '外卖小哥打电话说“你的外卖到了，放门口了”，你？',
+    q: '外卖小哥打电话说外卖到了，放门口了，你？',
     options: [
-      { t: '温柔地说“好的，谢谢，辛苦了”', k: 'peach' },
+      { t: '温柔地说好的，谢谢，辛苦了', k: 'peach' },
       { t: '嗯一声，挂断，等五分钟再开门', k: 'blueberry' },
       { t: '先看猫眼，确认没人再开门', k: 'grape' },
       { t: '立刻冲出去，因为饿疯了', k: 'apple' },
-      { t: '回“好的”，然后继续躺五分钟', k: 'orange' },
+      { t: '回好的，然后继续躺五分钟', k: 'orange' },
       { t: '打开门，发现小哥还在，对视三秒', k: 'hotpot' },
       { t: '开门拿了外卖，然后忘了自己点过', k: 'stone' }
     ]
@@ -563,9 +511,9 @@ const questions = [
       { t: '觉得他可能太忙了，理解', k: 'peach' },
       { t: '记在心里，下次也不回他', k: 'blueberry' },
       { t: '给他朋友圈点个赞，提醒他', k: 'grape' },
-      { t: '直接评论“你为什么不回我消息”', k: 'apple' },
+      { t: '直接评论你为什么不回我消息', k: 'apple' },
       { t: '算了，无所谓', k: 'orange' },
-      { t: '私聊他“你什么意思？”', k: 'hotpot' }
+      { t: '私聊他你什么意思', k: 'hotpot' }
     ]
   },
   {
@@ -573,7 +521,7 @@ const questions = [
     options: [
       { t: '把自己埋进被子里，小声尖叫', k: 'peach' },
       { t: '面无表情地翻个身，继续想', k: 'blueberry' },
-      { t: '打开手机，给朋友发“你睡了吗”', k: 'grape' },
+      { t: '打开手机，给朋友发你睡了吗', k: 'grape' },
       { t: '坐起来，骂自己一句，然后睡不着了', k: 'apple' },
       { t: '想了三秒，然后忘了', k: 'orange' },
       { t: '开始给那个当事人发消息道歉', k: 'hotpot' },
@@ -594,22 +542,22 @@ const questions = [
   {
     q: '你在电梯里遇到一个不太熟的同事，你会？',
     options: [
-      { t: '微笑点头，说“早啊”', k: 'peach' },
+      { t: '微笑点头，说早啊', k: 'peach' },
       { t: '假装看手机，希望他没看见我', k: 'blueberry' },
       { t: '随便聊两句天气', k: 'grape' },
-      { t: '大声说“你今天穿得真好看！”', k: 'apple' },
+      { t: '大声说你今天穿得真好看', k: 'apple' },
       { t: '点头，然后看楼层数字', k: 'orange' },
       { t: '开始讲一个冷笑话', k: 'hotpot' },
       { t: '忘了自己要去几楼', k: 'stone' }
     ]
   },
   {
-    q: '你点的奶茶等了半小时，店员说“马上好”，你会？',
+    q: '你点的奶茶等了半小时，店员说马上好，你会？',
     options: [
-      { t: '说“没关系，慢慢来”', k: 'peach' },
+      { t: '说没关系，慢慢来', k: 'peach' },
       { t: '面无表情地站着，内心已经走了', k: 'blueberry' },
-      { t: '说“好的”，然后继续刷手机', k: 'grape' },
-      { t: '说“那我不等了”', k: 'apple' },
+      { t: '说好的，然后继续刷手机', k: 'grape' },
+      { t: '说那我不等了', k: 'apple' },
       { t: '继续等，反正也没事', k: 'orange' },
       { t: '开始和店员聊天，问他一天做多少杯', k: 'hotpot' }
     ]
@@ -617,7 +565,7 @@ const questions = [
 ];
 
 /* ============ 员工随机评论池 ============ */
-const STAFF_REPLIES = {
+var STAFF_REPLIES = {
   '❤️': [
     '纳尼！居然会有这种回答？？',
     '我选这个，你不选吗？',
@@ -635,11 +583,11 @@ const STAFF_REPLIES = {
     '来吧我命定的好劲水！'
   ],
   '♟️': [
-    '反正都一样。',
+    '选这个，反正都一样。',
     '随便啦，无所谓。',
     '嗯……还行吧。',
-    '不知道，反正我选它。',
-    '嗯。（没有更多补充）',
+    '不知道，但你选了它。',
+    '嗯。没有更多补充。',
     '行吧，下一题。'
   ],
   '⚡': [
@@ -653,23 +601,25 @@ const STAFF_REPLIES = {
 };
 
 /* ============ 状态 ============ */
-let idx = 0;
-const scores = { peach: 0, blueberry: 0, grape: 0, apple: 0, orange: 0, hotpot: 0, stone: 0 };
+var idx = 0;
+var scores = { peach: 0, blueberry: 0, grape: 0, apple: 0, orange: 0, hotpot: 0, stone: 0 };
 
 /* ============ 元素 ============ */
-const startScreen  = document.getElementById('start-screen');
-const quizScreen   = document.getElementById('quiz-screen');
-const resultScreen = document.getElementById('result-screen');
-const progressFill = document.getElementById('progress-fill');
-const progressNum  = document.getElementById('progress-num');
-const qText        = document.getElementById('q-text');
-const optionsEl    = document.getElementById('options');
-const commentsBox  = document.getElementById('comments');
-const commentList  = document.getElementById('comment-list');
+var startScreen  = document.getElementById('start-screen');
+var quizScreen   = document.getElementById('quiz-screen');
+var resultScreen = document.getElementById('result-screen');
+var progressFill = document.getElementById('progress-fill');
+var progressNum  = document.getElementById('progress-num');
+var qText        = document.getElementById('q-text');
+var optionsEl    = document.getElementById('options');
+var commentsBox  = document.getElementById('comments');
+var commentList  = document.getElementById('comment-list');
+var fxLayer      = document.getElementById('egg-fx-layer');
 
 /* ============ 屏幕切换 ============ */
 function showScreen(el) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  var all = document.querySelectorAll('.screen');
+  for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
   el.classList.add('active');
   el.style.animation = 'none';
   void el.offsetWidth;
@@ -678,62 +628,59 @@ function showScreen(el) {
 
 /* ============ 渲染题目 ============ */
 function renderQuestion() {
-  const q = questions[idx];
+  var q = questions[idx];
   progressFill.style.width = ((idx) / questions.length * 100) + '%';
   progressNum.textContent = (idx + 1) + ' / ' + questions.length;
   qText.textContent = q.q;
   optionsEl.innerHTML = '';
 
-  q.options.forEach(opt => {
-    const btn = document.createElement('button');
-    btn.className = 'option';
-    btn.textContent = opt.t;
-    btn.onclick = () => choose(opt.k, btn);
-    optionsEl.appendChild(btn);
-  });
+  for (var i = 0; i < q.options.length; i++) {
+    (function(opt) {
+      var btn = document.createElement('button');
+      btn.className = 'option';
+      btn.textContent = opt.t;
+      btn.onclick = function() { choose(opt.k, btn); };
+      optionsEl.appendChild(btn);
+    })(q.options[i]);
+  }
 }
 
-/* ============ 生成员工气泡 ============ */
+/* ============ 随机员工气泡 ============ */
 function pickStaffReply() {
-  const emojis = ['❤️', '☁️', '♟️', '⚡'];
-  const e = emojis[Math.floor(Math.random() * emojis.length)];
-  const pool = STAFF_REPLIES[e];
-  const t = pool[Math.floor(Math.random() * pool.length)];
-  return { e, t };
+  var emojis = ['❤️', '☁️', '♟️', '⚡'];
+  var e = emojis[Math.floor(Math.random() * emojis.length)];
+  var pool = STAFF_REPLIES[e];
+  var t = pool[Math.floor(Math.random() * pool.length)];
+  return { e: e, t: t };
 }
 
 /* ============ 选择答案 ============ */
-let locked = false;
+var locked = false;
 function choose(key, btn) {
   if (locked) return;
   locked = true;
 
   scores[key]++;
   btn.classList.add('picked');
-  optionsEl.querySelectorAll('.option').forEach(b => b.disabled = true);
+  var allOpts = optionsEl.querySelectorAll('.option');
+  for (var i = 0; i < allOpts.length; i++) allOpts[i].disabled = true;
   progressFill.style.width = ((idx + 1) / questions.length * 100) + '%';
 
-  const reply = pickStaffReply();
-  const bubble = document.createElement('div');
+  var reply = pickStaffReply();
+  var bubble = document.createElement('div');
   bubble.className = 'staff-bubble';
   bubble.innerHTML = '<span class="sb-emoji">' + reply.e + '</span><span class="sb-text">' + reply.t + '</span>';
-  btn.insertAdjacentElement('afterend', bubble);
+  btn.parentNode.insertBefore(bubble, btn.nextSibling);
 
-  requestAnimationFrame(() => {
-    bubble.classList.add('show');
-  });
+  setTimeout(function() { bubble.classList.add('show'); }, 30);
 
-  setTimeout(() => {
+  setTimeout(function() {
     idx++;
     locked = false;
     if (idx < questions.length) {
       renderQuestion();
-      quizScreen.style.animation = 'none';
-      void quizScreen.offsetWidth;
-      quizScreen.style.animation = '';
     } else {
-      const isStone = willBeStone();
-      if (isStone) {
+      if (willBeStone()) {
         playVoidAndResult();
       } else {
         showResult();
@@ -742,17 +689,20 @@ function choose(key, btn) {
   }, 1600);
 }
 
-/* ============ 判断是否是灼石 ============ */
+/* ============ 是否灼石 ============ */
 function willBeStone() {
-  const normalKeys = ['peach', 'blueberry', 'grape', 'apple', 'orange', 'hotpot'];
-  const max = Math.max(...normalKeys.map(k => scores[k]));
+  var normalKeys = ['peach', 'blueberry', 'grape', 'apple', 'orange', 'hotpot'];
+  var max = 0;
+  for (var i = 0; i < normalKeys.length; i++) {
+    if (scores[normalKeys[i]] > max) max = scores[normalKeys[i]];
+  }
   return scores.stone > max;
 }
 
-/* ============ 虚空画面 + 黑洞 ============ */
+/* ============ 虚空 + 黑洞 ============ */
 function playVoidAndResult() {
-  const overlay = document.getElementById('void-overlay');
-  const hole    = document.getElementById('blackhole');
+  var overlay = document.getElementById('void-overlay');
+  var hole    = document.getElementById('blackhole');
 
   hole.classList.remove('grow');
   hole.style.width = '10px';
@@ -761,36 +711,39 @@ function playVoidAndResult() {
 
   overlay.classList.add('active');
 
-  setTimeout(() => {
-    hole.classList.add('grow');
-  }, 200);
+  setTimeout(function() { hole.classList.add('grow'); }, 200);
 
-  setTimeout(() => {
+  setTimeout(function() {
     overlay.classList.remove('active');
     showResult();
-    setTimeout(() => playStoneEgg(), 250);
+    setTimeout(playStoneEgg, 250);
   }, 3600);
 }
 
 /* ============ 结果 ============ */
 function showResult() {
-  const normalKeys = ['peach', 'blueberry', 'grape', 'apple', 'orange', 'hotpot'];
-  const max = Math.max(...normalKeys.map(k => scores[k]));
+  var normalKeys = ['peach', 'blueberry', 'grape', 'apple', 'orange', 'hotpot'];
+  var max = 0;
+  for (var i = 0; i < normalKeys.length; i++) {
+    if (scores[normalKeys[i]] > max) max = scores[normalKeys[i]];
+  }
 
-  let winner;
+  var winner;
   if (scores.stone > max) {
     winner = 'stone';
   } else {
-    const top = normalKeys.filter(k => scores[k] === max);
+    var top = [];
+    for (var j = 0; j < normalKeys.length; j++) {
+      if (scores[normalKeys[j]] === max) top.push(normalKeys[j]);
+    }
     winner = top[Math.floor(Math.random() * top.length)];
   }
 
-  const data = TYPES[winner];
+  var data = TYPES[winner];
   renderResult(data, normalKeys);
   showScreen(resultScreen);
 }
 
-/* ============ 渲染结果 ============ */
 function renderResult(data, normalKeys) {
   document.getElementById('r-emoji').textContent = data.emoji;
   document.getElementById('r-name').textContent = data.name;
@@ -807,52 +760,59 @@ function renderResult(data, normalKeys) {
   renderBars(normalKeys);
 }
 
-/* ============ 渲染评论 ============ */
 function renderComments(comments) {
   commentList.innerHTML = '';
-  comments.forEach((c, i) => {
-    const div = document.createElement('div');
-    div.className = 'comment';
-    div.style.animationDelay = (i * 0.08) + 's';
-    div.innerHTML = '<span class="c-emoji">' + c.e + '</span><span class="c-text">' + c.t + '</span>';
-    commentList.appendChild(div);
-  });
+  for (var i = 0; i < comments.length; i++) {
+    (function(c, i) {
+      var div = document.createElement('div');
+      div.className = 'comment';
+      div.style.animationDelay = (i * 0.08) + 's';
+      div.innerHTML = '<span class="c-emoji">' + c.e + '</span><span class="c-text">' + c.t + '</span>';
+      commentList.appendChild(div);
+    })(comments[i], i);
+  }
 }
 
-/* ============ 渲染成分条 ============ */
 function renderBars(keys) {
-  const barsEl = document.getElementById('bars');
+  var barsEl = document.getElementById('bars');
   barsEl.innerHTML = '';
+  for (var i = 0; i < keys.length; i++) {
+    (function(k) {
+      var t = TYPES[k];
+      var pct = Math.round(scores[k] / questions.length * 100);
+      var row = document.createElement('div');
+      row.className = 'bar-row';
+      row.innerHTML =
+        '<span class="bar-label">' + t.emoji + ' ' + t.name + '</span>' +
+        '<div class="bar-track"><div class="bar-fill" data-w="' + pct + '" ' +
+        'style="background:' + t.color + '"></div></div>' +
+        '<span class="bar-pct">' + pct + '%</span>';
+      barsEl.appendChild(row);
+    })(keys[i]);
+  }
 
-  keys.forEach(k => {
-    const t = TYPES[k];
-    const pct = Math.round(scores[k] / questions.length * 100);
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML =
-      '<span class="bar-label">' + t.emoji + ' ' + t.name + '</span>' +
-      '<div class="bar-track"><div class="bar-fill" data-w="' + pct + '" ' +
-      'style="background:' + t.color + '"></div></div>' +
-      '<span class="bar-pct">' + pct + '%</span>';
-    barsEl.appendChild(row);
-  });
-
-  setTimeout(() => {
-    barsEl.querySelectorAll('.bar-fill').forEach(el => {
-      el.style.width = el.dataset.w + '%';
-    });
+  setTimeout(function() {
+    var fills = barsEl.querySelectorAll('.bar-fill');
+    for (var i = 0; i < fills.length; i++) {
+      fills[i].style.width = fills[i].getAttribute('data-w') + '%';
+    }
   }, 120);
 }
 
-/* ============ 灼石弹窗动画 ============ */
-function playStoneEgg() {
-  const overlay  = document.getElementById('egg-overlay');
-  const chat     = document.getElementById('egg-chat');
-  const messages = document.getElementById('egg-messages');
+/* ============ 清空特效层 ============ */
+function clearFxLayer() {
+  while (fxLayer.firstChild) {
+    fxLayer.removeChild(fxLayer.firstChild);
+  }
+}
 
-  // 清理所有上一次残留的 body 级动态元素
-  document.body.querySelectorAll('.dynamic-flyer').forEach(el => el.remove());
-  overlay.querySelectorAll('.dynamic-flyer').forEach(el => el.remove());
+/* ============ 灼石弹窗 ============ */
+function playStoneEgg() {
+  var overlay  = document.getElementById('egg-overlay');
+  var messages = document.getElementById('egg-messages');
+
+  /* 先彻底清空特效层 */
+  clearFxLayer();
 
   messages.innerHTML = '';
   overlay.classList.remove('closable', 'shake');
@@ -861,9 +821,9 @@ function playStoneEgg() {
   void overlay.offsetWidth;
   overlay.classList.add('show');
 
-  /* ---------- 工具函数 ---------- */
+  /* --- 工具 --- */
   function addMsg(emoji, text) {
-    const div = document.createElement('div');
+    var div = document.createElement('div');
     div.className = 'egg-msg';
     div.innerHTML = '<span class="m-emoji">' + emoji + '</span><span class="m-text">' + text + '</span>';
     messages.appendChild(div);
@@ -871,179 +831,180 @@ function playStoneEgg() {
   }
 
   function makeFlyer(emoji, size) {
-    const el = document.createElement('span');
-    el.className = 'flyer dynamic-flyer';
+    var el = document.createElement('span');
+    el.className = 'flyer';
     el.textContent = emoji;
     if (size) el.style.fontSize = size + 'px';
-    document.body.appendChild(el);
+    fxLayer.appendChild(el);
     return el;
   }
 
-  // 发射 ➖
   function shootMinus(fromEl, targetEl) {
-    const fr = fromEl.getBoundingClientRect();
-    const tr = targetEl.getBoundingClientRect();
-    const fx = fr.left + fr.width / 2;
-    const fy = fr.top + fr.height / 2;
-    const tx = tr.left + tr.width / 2;
-    const ty = tr.top + tr.height / 2;
+    var fr = fromEl.getBoundingClientRect();
+    var tr = targetEl.getBoundingClientRect();
+    var fx = fr.left + fr.width / 2;
+    var fy = fr.top + fr.height / 2;
+    var tx = tr.left + tr.width / 2;
+    var ty = tr.top + tr.height / 2;
 
-    const m = document.createElement('span');
-    m.className = 'dynamic-flyer';
+    var m = document.createElement('span');
     m.textContent = '➖';
-    m.style.cssText = 'position:fixed;left:' + fx + 'px;top:' + fy + 'px;font-size:30px;z-index:1002;pointer-events:none;transform:translate(-50%,-50%) scale(1);opacity:1;transition:all .45s ease-in;';
-    document.body.appendChild(m);
+    m.style.cssText = 'position:absolute;left:' + fx + 'px;top:' + fy + 'px;font-size:30px;pointer-events:none;transform:translate(-50%,-50%) scale(1);opacity:1;transition:all .45s ease-in;';
+    fxLayer.appendChild(m);
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        m.style.left = tx + 'px';
-        m.style.top = ty + 'px';
-        m.style.opacity = '0';
-        m.style.transform = 'translate(-50%,-50%) scale(1.6) rotate(720deg)';
-      });
-    });
+    setTimeout(function() {
+      m.style.left = tx + 'px';
+      m.style.top = ty + 'px';
+      m.style.opacity = '0';
+      m.style.transform = 'translate(-50%,-50%) scale(1.6) rotate(720deg)';
+    }, 30);
 
-    setTimeout(() => m.remove(), 550);
+    setTimeout(function() {
+      if (m.parentNode) m.parentNode.removeChild(m);
+    }, 600);
   }
 
-  // 对话气泡
   function makeSpeechBubble(targetEl, text) {
-    const r = targetEl.getBoundingClientRect();
-    const bubble = document.createElement('div');
-    bubble.className = 'speech-bubble dynamic-flyer';
+    var r = targetEl.getBoundingClientRect();
+    var bubble = document.createElement('div');
+    bubble.className = 'speech-bubble';
     bubble.textContent = text;
     bubble.style.left = (r.left + r.width / 2) + 'px';
     bubble.style.top = (r.top - 12) + 'px';
-    document.body.appendChild(bubble);
+    fxLayer.appendChild(bubble);
     void bubble.offsetWidth;
     bubble.classList.add('show');
     return bubble;
   }
 
-  /* ---------- 1. 皇冠登场 ---------- */
-  const crown = makeFlyer('👑');
+  /* --- 1. 皇冠登场 --- */
+  var crown = makeFlyer('👑');
   crown.style.transition = 'none';
   crown.style.left = '50%';
   crown.style.top = '42%';
   crown.style.opacity = '0';
   crown.style.transform = 'translate(-50%, -50%) scale(0.2) rotate(-40deg)';
 
-  setTimeout(() => addMsg('👑', '遗忘是件好事'), 150);
+  setTimeout(function() { addMsg('👑', '遗忘是件好事'); }, 150);
 
-  setTimeout(() => {
+  setTimeout(function() {
     crown.style.transition = 'all .5s cubic-bezier(.2,1.5,.5,1)';
     crown.style.opacity = '1';
     crown.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
   }, 700);
 
-  /* ---------- 2. 第一只霸王龙攻击 ---------- */
-  const dino1 = makeFlyer('🦖');
+  /* --- 2. 第一只霸王龙攻击 --- */
+  var dino1 = makeFlyer('🦖');
   dino1.style.transition = 'none';
   dino1.style.left = '120%';
   dino1.style.top = '42%';
   dino1.style.opacity = '0';
   dino1.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
 
-  setTimeout(() => {
+  setTimeout(function() {
     dino1.style.transition = 'all .4s ease-in';
     dino1.style.opacity = '1';
     dino1.style.left = '52%';
     dino1.style.transform = 'translate(-50%, -50%) scale(1.1) rotate(-20deg)';
   }, 1300);
 
-  setTimeout(() => {
+  setTimeout(function() {
     overlay.classList.add('shake');
-    setTimeout(() => overlay.classList.remove('shake'), 320);
+    setTimeout(function() { overlay.classList.remove('shake'); }, 320);
   }, 1650);
 
-  /* ---------- 3. 霸王龙军团 ---------- */
-  const dinoPositions = [
+  /* --- 3. 霸王龙军团 --- */
+  var dinoPositions = [
     { l: '-20%', t: '15%', r: '30deg' },
     { l: '120%', t: '15%', r: '-30deg' },
     { l: '-20%', t: '75%', r: '-30deg' },
     { l: '120%', t: '75%', r: '30deg' },
     { l: '50%',  t: '-20%', r: '15deg' }
   ];
-  const dinoArmy = dinoPositions.map(pos => {
-    const d = makeFlyer('🦖');
-    d.style.transition = 'none';
-    d.style.left = pos.l;
-    d.style.top = pos.t;
-    d.style.opacity = '0';
-    d.style.transform = 'translate(-50%, -50%) scale(0.7) rotate(' + pos.r + ')';
-    return d;
-  });
+  var dinoArmy = [];
+  for (var di = 0; di < dinoPositions.length; di++) {
+    (function(pos) {
+      var d = makeFlyer('🦖');
+      d.style.transition = 'none';
+      d.style.left = pos.l;
+      d.style.top = pos.t;
+      d.style.opacity = '0';
+      d.style.transform = 'translate(-50%, -50%) scale(0.7) rotate(' + pos.r + ')';
+      dinoArmy.push(d);
+    })(dinoPositions[di]);
+  }
 
-  setTimeout(() => {
-    dinoArmy.forEach(d => {
-      d.style.transition = 'all .4s ease-out';
-      d.style.opacity = '1';
-      d.style.left = '50%';
-      d.style.top = '42%';
-      d.style.transform = 'translate(-50%, -50%) scale(0.9) rotate(0deg)';
-    });
+  setTimeout(function() {
+    for (var k = 0; k < dinoArmy.length; k++) {
+      dinoArmy[k].style.transition = 'all .4s ease-out';
+      dinoArmy[k].style.opacity = '1';
+      dinoArmy[k].style.left = '50%';
+      dinoArmy[k].style.top = '42%';
+      dinoArmy[k].style.transform = 'translate(-50%, -50%) scale(0.9) rotate(0deg)';
+    }
   }, 2000);
 
-  setTimeout(() => {
+  setTimeout(function() {
     overlay.classList.add('shake');
-    setTimeout(() => overlay.classList.remove('shake'), 320);
+    setTimeout(function() { overlay.classList.remove('shake'); }, 320);
   }, 2300);
 
-  /* ---------- 4. 皇冠暴怒变大 ---------- */
-  setTimeout(() => {
+  /* --- 4. 皇冠暴怒 --- */
+  setTimeout(function() {
     crown.style.transition = 'all .35s ease-out';
     crown.style.top = '30%';
     crown.style.transform = 'translate(-50%, -50%) scale(1.6) rotate(-8deg)';
     crown.style.filter = 'drop-shadow(0 0 24px #ff9a44) drop-shadow(0 0 48px #ff5e00)';
   }, 2600);
 
-  setTimeout(() => {
+  setTimeout(function() {
     crown.style.transition = 'all .35s ease-out';
     crown.style.transform = 'translate(-50%, -50%) scale(2.4) rotate(-12deg)';
   }, 2900);
 
-  /* ---------- 5. 恐龙合并成巨型恐龙 ---------- */
-  setTimeout(() => {
-    dinoArmy.forEach((d) => {
-      d.style.transition = 'all .5s cubic-bezier(.3,.7,.4,1)';
-      d.style.left = '50%';
-      d.style.top = '60%';
-      d.style.transform = 'translate(-50%, -50%) scale(0.9) rotate(0deg)';
-    });
+  /* --- 5. 恐龙合并 --- */
+  setTimeout(function() {
+    for (var k = 0; k < dinoArmy.length; k++) {
+      dinoArmy[k].style.transition = 'all .5s cubic-bezier(.3,.7,.4,1)';
+      dinoArmy[k].style.left = '50%';
+      dinoArmy[k].style.top = '60%';
+      dinoArmy[k].style.transform = 'translate(-50%, -50%) scale(0.9) rotate(0deg)';
+    }
     dino1.style.transition = 'all .5s cubic-bezier(.3,.7,.4,1)';
     dino1.style.left = '50%';
     dino1.style.top = '60%';
     dino1.style.transform = 'translate(-50%, -50%) scale(0.9) rotate(0deg)';
   }, 3200);
 
-  let mergedDino;
-  setTimeout(() => {
+  var mergedDino;
+  setTimeout(function() {
     // 闪光
-    const flash = document.createElement('div');
-    flash.className = 'dynamic-flyer';
-    flash.style.cssText = 'position:fixed;left:50%;top:60%;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#ff9a44 30%,#ff0000 60%,transparent 100%);transform:translate(-50%,-50%);z-index:1002;pointer-events:none;opacity:0;';
-    document.body.appendChild(flash);
-    requestAnimationFrame(() => {
+    var flash = document.createElement('div');
+    flash.style.cssText = 'position:absolute;left:50%;top:60%;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#ff9a44 30%,#ff0000 60%,transparent 100%);transform:translate(-50%,-50%);pointer-events:none;opacity:0;';
+    fxLayer.appendChild(flash);
+    setTimeout(function() {
       flash.style.transition = 'all .35s ease-out';
       flash.style.opacity = '1';
       flash.style.width = '200px';
       flash.style.height = '200px';
-    });
-    setTimeout(() => {
+    }, 30);
+    setTimeout(function() {
       flash.style.transition = 'all .35s ease-in';
       flash.style.opacity = '0';
-      setTimeout(() => flash.remove(), 380);
+      setTimeout(function() {
+        if (flash.parentNode) flash.parentNode.removeChild(flash);
+      }, 400);
     }, 300);
 
-    // 旧恐龙淡出
-    dinoArmy.forEach(d => {
-      d.style.transition = 'all .28s ease-in';
-      d.style.opacity = '0';
-    });
+    // 老恐龙淡出
+    for (var k = 0; k < dinoArmy.length; k++) {
+      dinoArmy[k].style.transition = 'all .28s ease-in';
+      dinoArmy[k].style.opacity = '0';
+    }
     dino1.style.transition = 'all .28s ease-in';
     dino1.style.opacity = '0';
 
-    // 巨型恐龙出现
+    // 合并恐龙
     mergedDino = makeFlyer('🦖');
     mergedDino.style.transition = 'none';
     mergedDino.style.left = '50%';
@@ -1052,89 +1013,89 @@ function playStoneEgg() {
     mergedDino.style.transform = 'translate(-50%, -50%) scale(0.5) rotate(0deg)';
     mergedDino.style.filter = 'drop-shadow(0 0 20px #ff5e00)';
 
-    requestAnimationFrame(() => {
+    setTimeout(function() {
       mergedDino.style.transition = 'all .45s cubic-bezier(.2,1.5,.5,1)';
       mergedDino.style.opacity = '1';
       mergedDino.style.transform = 'translate(-50%, -50%) scale(2.2) rotate(-8deg)';
-    });
+    }, 30);
 
-    setTimeout(() => {
+    setTimeout(function() {
       overlay.classList.add('shake');
-      setTimeout(() => overlay.classList.remove('shake'), 340);
+      setTimeout(function() { overlay.classList.remove('shake'); }, 340);
     }, 380);
   }, 3700);
 
-  /* ---------- 6. ♻️ 出来看戏 ---------- */
-  const recycle = makeFlyer('♻️', 48);
+  /* --- 6. ♻️ 看戏 --- */
+  var recycle = makeFlyer('♻️', 48);
   recycle.style.transition = 'none';
   recycle.style.left = '92%';
   recycle.style.top = '25%';
   recycle.style.opacity = '0';
   recycle.style.transform = 'translate(-50%, -50%) scale(0.5) rotate(-20deg)';
 
-  setTimeout(() => {
+  setTimeout(function() {
     recycle.style.transition = 'all .4s cubic-bezier(.2,1.5,.5,1)';
     recycle.style.opacity = '1';
     recycle.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
   }, 4200);
 
-  setTimeout(() => {
+  setTimeout(function() {
     recycle.style.transition = 'transform .5s ease-in-out';
     recycle.style.transform = 'translate(-50%, -50%) scale(1.08) rotate(8deg)';
   }, 4700);
-  setTimeout(() => {
+  setTimeout(function() {
     recycle.style.transform = 'translate(-50%, -50%) scale(1) rotate(-8deg)';
   }, 5200);
-  setTimeout(() => {
+  setTimeout(function() {
     recycle.style.transform = 'translate(-50%, -50%) scale(1.08) rotate(8deg)';
   }, 5700);
 
-  /* ---------- 7. ❌ 出现，开始发射 ➖ 攻击皇冠 ---------- */
-  const cross = makeFlyer('❌', 52);
+  /* --- 7. ❌ 出现，射 ➖ --- */
+  var cross = makeFlyer('❌', 52);
   cross.style.transition = 'none';
   cross.style.left = '85%';
   cross.style.top = '55%';
   cross.style.opacity = '0';
   cross.style.transform = 'translate(-50%, -50%) scale(0.5) rotate(20deg)';
 
-  setTimeout(() => {
+  setTimeout(function() {
     cross.style.transition = 'all .35s cubic-bezier(.2,1.5,.5,1)';
     cross.style.opacity = '1';
     cross.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
   }, 4600);
 
-  setTimeout(() => shootMinus(cross, crown), 4900);
-  setTimeout(() => shootMinus(cross, crown), 5150);
-  setTimeout(() => shootMinus(cross, crown), 5400);
+  setTimeout(function() { shootMinus(cross, crown); }, 4900);
+  setTimeout(function() { shootMinus(cross, crown); }, 5150);
+  setTimeout(function() { shootMinus(cross, crown); }, 5400);
 
-  setTimeout(() => {
+  setTimeout(function() {
     crown.style.transition = 'transform .1s ease-out';
     crown.style.transform = 'translate(-50%, -50%) scale(2.3) rotate(-16deg)';
-    setTimeout(() => {
+    setTimeout(function() {
       crown.style.transition = 'transform .15s ease-out';
       crown.style.transform = 'translate(-50%, -50%) scale(2.4) rotate(-12deg)';
     }, 110);
   }, 5000);
-  setTimeout(() => {
+  setTimeout(function() {
     crown.style.transition = 'transform .1s ease-out';
     crown.style.transform = 'translate(-50%, -50%) scale(2.3) rotate(-8deg)';
-    setTimeout(() => {
+    setTimeout(function() {
       crown.style.transition = 'transform .15s ease-out';
       crown.style.transform = 'translate(-50%, -50%) scale(2.4) rotate(-12deg)';
     }, 110);
   }, 5250);
 
-  /* ---------- 8. 霸王龙冲上去打皇冠 ---------- */
-  setTimeout(() => {
+  /* --- 8. 霸王龙冲上去打皇冠 --- */
+  setTimeout(function() {
     mergedDino.style.transition = 'all .4s ease-in';
     mergedDino.style.left = '42%';
     mergedDino.style.top = '32%';
     mergedDino.style.transform = 'translate(-50%, -50%) scale(2.6) rotate(-28deg)';
   }, 5450);
 
-  setTimeout(() => {
+  setTimeout(function() {
     overlay.classList.add('shake');
-    setTimeout(() => overlay.classList.remove('shake'), 340);
+    setTimeout(function() { overlay.classList.remove('shake'); }, 340);
 
     crown.style.transition = 'all .15s ease-in';
     crown.style.left = '52%';
@@ -1142,14 +1103,14 @@ function playStoneEgg() {
     crown.style.transform = 'translate(-50%, -50%) scale(2.3) rotate(15deg)';
   }, 5800);
 
-  /* ---------- 9. 皇冠弹对话框：“就这点本事？以多欺少！” ---------- */
-  let crownBubble;
-  setTimeout(() => {
+  /* --- 9. 皇冠弹对话框 --- */
+  var crownBubble;
+  setTimeout(function() {
     crownBubble = makeSpeechBubble(crown, '就这点本事？以多欺少！');
   }, 6100);
 
-  /* ---------- 10. 皇冠向左边跑，其他 emoji 一起跟着跑 ---------- */
-  setTimeout(() => {
+  /* --- 10. 皇冠左跑，其他追 --- */
+  setTimeout(function() {
     if (crownBubble) crownBubble.classList.remove('show');
 
     crown.style.transition = 'all .9s cubic-bezier(.4,.05,.6,1)';
@@ -1176,36 +1137,34 @@ function playStoneEgg() {
     cross.style.transform = 'translate(-50%, -50%) scale(1) rotate(-540deg)';
   }, 6600);
 
-  setTimeout(() => shootMinus(cross, crown), 6800);
-  setTimeout(() => shootMinus(cross, crown), 7100);
-  setTimeout(() => shootMinus(cross, crown), 7400);
+  setTimeout(function() { shootMinus(cross, crown); }, 6800);
+  setTimeout(function() { shootMinus(cross, crown); }, 7100);
+  setTimeout(function() { shootMinus(cross, crown); }, 7400);
 
-  setTimeout(() => {
-    cross.style.opacity = '0';
-  }, 7600);
+  setTimeout(function() { cross.style.opacity = '0'; }, 7600);
 
-  /* ---------- 11. 最左边出现 🍵 ---------- */
-  const tea = makeFlyer('🍵', 52);
+  /* --- 11. 🍵 出现 --- */
+  var tea = makeFlyer('🍵', 52);
   tea.style.transition = 'none';
   tea.style.left = '-20%';
   tea.style.top = '50%';
   tea.style.opacity = '0';
   tea.style.transform = 'translate(-50%, -50%) scale(0.5) rotate(-20deg)';
 
-  setTimeout(() => {
+  setTimeout(function() {
     tea.style.transition = 'all .5s cubic-bezier(.2,1.5,.5,1)';
     tea.style.opacity = '1';
     tea.style.left = '25%';
     tea.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
   }, 7600);
 
-  /* ---------- 12. 🍵 弹对话框：“？？？” ---------- */
-  setTimeout(() => {
+  /* --- 12. 🍵 弹气泡 --- */
+  setTimeout(function() {
     makeSpeechBubble(tea, '？？？');
   }, 8100);
 
-  /* ---------- 13. 🍵 也往左边跑 ---------- */
-  setTimeout(() => {
+  /* --- 13. 🍵 也跑 --- */
+  setTimeout(function() {
     tea.style.transition = 'all .7s cubic-bezier(.4,.05,.6,1)';
     tea.style.left = '-40%';
     tea.style.top = '45%';
@@ -1213,32 +1172,35 @@ function playStoneEgg() {
     tea.style.opacity = '0';
   }, 8800);
 
-  /* ---------- 14. 聊天消息一条一条蹦出来 ---------- */
-  const msgs = [
+  /* --- 14. 聊天消息 --- */
+  var msgs = [
     ['❤️', '？？？'],
     ['⚡', '刚刚飞过去了啥？我眼花了？'],
     ['☁️', '没有吧！我也看见了'],
+    ['☁️', '你没发现旁边还有个对话框吗'],
+    ['⚡', '哦哦......'],
+    ['❤️', '怎么跟我说的话是一样的'],
     ['♟️', '没事，这只是个测试版'],
     ['♟️', '他们应该看不到'],
-    ['♟️', '应该吧……。']
+    ['♟️', '应该吧……嗯。']
   ];
-  msgs.forEach((m, i) => {
-    setTimeout(() => addMsg(m[0], m[1]), 9600 + i * 420);
-  });
+  for (var mi = 0; mi < msgs.length; mi++) {
+    (function(m, i) {
+      setTimeout(function() { addMsg(m[0], m[1]); }, 9600 + i * 420);
+    })(msgs[mi], mi);
+  }
 
-  const totalTime = 9600 + msgs.length * 420 + 300;
-  setTimeout(() => overlay.classList.add('closable'), totalTime);
+  var totalTime = 9600 + msgs.length * 420 + 300;
+  setTimeout(function() { overlay.classList.add('closable'); }, totalTime);
 
-  // 关闭时清理所有悬浮元素（包括 body 上的气泡和飞行 emoji）
+  /* --- 关闭，彻底清空特效层 --- */
   function closeHandler() {
     if (!overlay.classList.contains('closable')) return;
     overlay.classList.remove('show');
     overlay.removeEventListener('click', closeHandler);
-    setTimeout(() => {
+    setTimeout(function() {
       overlay.style.display = 'none';
-      // 关键修复：同时清理 body 和 overlay 上的动态元素
-      document.body.querySelectorAll('.dynamic-flyer').forEach(el => el.remove());
-      overlay.querySelectorAll('.dynamic-flyer').forEach(el => el.remove());
+      clearFxLayer();  /* 关键：一键清空整个特效层 */
     }, 360);
   }
   overlay.addEventListener('click', closeHandler);
@@ -1248,26 +1210,28 @@ function playStoneEgg() {
 function reset() {
   idx = 0;
   locked = false;
-  Object.keys(scores).forEach(k => scores[k] = 0);
+  var keys = Object.keys(scores);
+  for (var i = 0; i < keys.length; i++) scores[keys[i]] = 0;
   progressFill.style.width = '0%';
   commentList.innerHTML = '';
+  clearFxLayer();
   showScreen(startScreen);
 }
 
 /* ============ 事件绑定 ============ */
-document.getElementById('start-btn').onclick = () => {
+document.getElementById('start-btn').onclick = function() {
   reset();
   renderQuestion();
   showScreen(quizScreen);
 };
 document.getElementById('again-btn').onclick = reset;
 
-/* ============ 背景漂浮 emoji ============ */
+/* ============ 背景漂浮 ============ */
 (function makeFloaters() {
-  const box = document.getElementById('floaters');
-  const emojis = ['❤️', '♟️', '⚡', '☁️'];
-  for (let i = 0; i < 24; i++) {
-    const s = document.createElement('span');
+  var box = document.getElementById('floaters');
+  var emojis = ['❤️', '♟️', '⚡', '☁️'];
+  for (var i = 0; i < 24; i++) {
+    var s = document.createElement('span');
     s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
     s.style.left = Math.random() * 100 + '%';
     s.style.fontSize = (16 + Math.random() * 24) + 'px';
