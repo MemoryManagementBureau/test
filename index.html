@@ -21,12 +21,8 @@
     overflow-x: hidden;
   }
 
-  /* 顶部官方账号 */
   .top-account {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: fixed; top: 0; left: 0; width: 100%;
     text-align: center;
     background: rgba(11, 11, 13, 0.9);
     color: #ff7a30;
@@ -38,7 +34,6 @@
     letter-spacing: 1px;
   }
 
-  /* 背景漂浮 emoji */
   .floaters { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
   .floaters span {
     position: absolute;
@@ -52,16 +47,13 @@
   }
 
   .app {
-    width: 100%;
-    max-width: 440px;
+    width: 100%; max-width: 440px;
     background: #1a1a1e;
     border: 1px solid #2a2a30;
     border-radius: 24px;
     padding: 24px 20px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
+    position: relative; z-index: 1; overflow: hidden;
   }
 
   .screen { display: none; animation: pop .3s ease both; }
@@ -71,7 +63,6 @@
     to   { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  /* 开始页 */
   .hero { text-align: center; padding: 10px 0; }
   .hero h1 { font-size: 24px; color: #ff7a30; margin: 0 0 8px; letter-spacing: 2px; }
   .hero p { color: #888; font-size: 13px; line-height: 1.8; margin: 0 0 24px; }
@@ -80,31 +71,21 @@
     background: rgba(255,122,48,0.15);
     color: #ff7a30;
     border: 1px solid rgba(255,122,48,0.3);
-    padding: 4px 12px;
-    border-radius: 99px;
-    font-size: 12px;
-    margin-bottom: 16px;
+    padding: 4px 12px; border-radius: 99px;
+    font-size: 12px; margin-bottom: 16px;
   }
 
   .btn {
-    display: block;
-    width: 100%;
-    padding: 16px;
-    border: 0;
-    border-radius: 14px;
+    display: block; width: 100%;
+    padding: 16px; border: 0; border-radius: 14px;
     background: linear-gradient(135deg, #ff9a44, #ff5e00);
-    color: #fff;
-    font-size: 17px;
-    font-weight: 700;
-    font-family: inherit;
-    letter-spacing: 1px;
-    cursor: pointer;
+    color: #fff; font-size: 17px; font-weight: 700;
+    font-family: inherit; letter-spacing: 1px; cursor: pointer;
     transition: .2s;
     box-shadow: 0 8px 24px rgba(255,94,0,0.3);
   }
   .btn:active { transform: scale(.97); }
 
-  /* 答题页 */
   .progress-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
   .progress-track { flex: 1; height: 6px; background: #2a2a30; border-radius: 99px; overflow: hidden; }
   .progress-fill {
@@ -126,8 +107,35 @@
   }
   .option:active { background: #2e2e35; border-color: #ff7a30; color: #fff; transform: scale(.98); }
   .option.picked { background: rgba(255,122,48,0.15); border-color: #ff7a30; color: #fff; }
+  .option:disabled { cursor: default; }
 
-  /* 结果页 */
+  .staff-bubble {
+    position: relative;
+    display: flex; gap: 8px;
+    margin: -2px 0 10px 18px;
+    padding: 9px 14px;
+    background: #2d1e15;
+    border-left: 3px solid #ff7a30;
+    border-radius: 0 12px 12px 0;
+    font-size: 13px; line-height: 1.5; color: #ddd;
+    max-width: 88%;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity .28s ease, transform .28s ease;
+  }
+  .staff-bubble.show { opacity: 1; transform: translateY(0); }
+  .staff-bubble::before {
+    content: '';
+    position: absolute;
+    top: -6px; left: 16px;
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 6px solid #ff7a30;
+  }
+  .staff-bubble .sb-emoji { flex-shrink: 0; font-size: 15px; }
+  .staff-bubble .sb-text { color: #ddd; }
+
   .result-header { text-align: center; margin-bottom: 20px; }
   .result-emoji {
     font-size: 64px; line-height: 1; margin-bottom: 12px;
@@ -148,7 +156,6 @@
     font-size: 14px; line-height: 1.8; color: #bbb; margin: 20px 0;
   }
 
-  /* 评论区 */
   .comments { margin: 16px 0; }
   .comments-title {
     font-size: 12px; color: #666; letter-spacing: 2px; margin-bottom: 10px;
@@ -163,23 +170,6 @@
   .comment .c-emoji { flex-shrink: 0; font-size: 16px; }
   .comment .c-text { color: #bbb; }
 
-  /* 灼石彩蛋专属 */
-  .egg-box {
-    background: #111;
-    border: 1px dashed #555;
-    border-radius: 12px;
-    padding: 16px;
-    margin: 16px 0;
-    text-align: center;
-    display: none;
-  }
-  .egg-box.show { display: block; animation: pop .5s ease both; }
-  .egg-box p {
-    margin: 6px 0; font-size: 14px; color: #aaa; font-family: monospace;
-  }
-  .egg-box p span { color: #ff7a30; }
-
-  /* 结果进度条 */
   .bars-title {
     font-size: 12px; color: #666; letter-spacing: 2px; margin-bottom: 10px;
   }
@@ -190,10 +180,7 @@
   .bar-label { width: 72px; flex-shrink: 0; color: #999; }
   .bar-track { flex: 1; height: 8px; background: #2a2a30; border-radius: 99px; overflow: hidden; }
   .bar-fill { height: 100%; width: 0; border-radius: 99px; transition: width .8s cubic-bezier(.2,.9,.3,1); }
-  .bar-pct {
-    width: 34px; text-align: right; color: #666;
-    font-variant-numeric: tabular-nums;
-  }
+  .bar-pct { width: 34px; text-align: right; color: #666; font-variant-numeric: tabular-nums; }
 
   .actions { display: flex; gap: 10px; margin-top: 24px; }
   .btn-ghost {
@@ -202,6 +189,197 @@
     color: #aaa; font-size: 14px; font-family: inherit; cursor: pointer;
   }
   .btn-ghost:active { background: #232328; }
+
+  /* ============ 灼石弹窗 ============ */
+  .egg-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity .35s ease;
+    padding: 20px;
+    overflow: hidden;
+  }
+  .egg-overlay.show { opacity: 1; }
+
+  .egg-chat {
+    width: 100%; max-width: 360px;
+    background: #1e1e24;
+    border: 1px solid #333;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+    position: relative; z-index: 1001;
+  }
+  .egg-chat-title {
+    font-size: 12px; color: #666;
+    letter-spacing: 2px; margin-bottom: 14px; text-align: center;
+  }
+  .egg-messages {
+    display: flex; flex-direction: column; gap: 8px;
+    min-height: 60px; max-height: 320px; overflow-y: auto;
+  }
+  .egg-msg {
+    display: flex; gap: 8px;
+    padding: 8px 12px; background: #2a2a32;
+    border-radius: 12px;
+    font-size: 13.5px; line-height: 1.55;
+    color: #ddd; max-width: 92%; align-self: flex-start;
+    animation: msgIn .35s cubic-bezier(.2,1.5,.5,1) both;
+  }
+  .egg-msg .m-emoji { flex-shrink: 0; }
+  .egg-msg .m-text { color: #ddd; }
+
+  @keyframes msgIn {
+    0% { opacity: 0; transform: translateY(12px) scale(.85); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .egg-hint {
+    margin-top: 14px;
+    font-size: 11px; color: #555;
+    text-align: center; letter-spacing: 1px;
+    opacity: 0; transition: opacity .5s;
+  }
+  .egg-overlay.closable .egg-hint {
+    opacity: 1; animation: hintBlink 2s infinite;
+  }
+  @keyframes hintBlink {
+    0%,100% { opacity: .35; }
+    50% { opacity: 1; }
+  }
+
+  .flyer {
+    position: fixed;
+    left: 50%; top: 42%;
+    font-size: 58px; line-height: 1;
+    opacity: 0; pointer-events: none;
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+    will-change: transform, left, top, opacity, font-size;
+  }
+
+  /* 对话气泡 */
+  .speech-bubble {
+    position: fixed;
+    background: #2a2a32;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 14px;
+    font-size: 14px;
+    border: 1px solid #ff7a30;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+    z-index: 1003;
+    pointer-events: none;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translate(-50%, -100%) scale(0.8);
+    transition: opacity .3s ease, transform .3s cubic-bezier(.2,1.5,.5,1);
+  }
+  .speech-bubble.show {
+    opacity: 1;
+    transform: translate(-50%, -100%) scale(1);
+  }
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 24px;
+    width: 0; height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #ff7a30;
+  }
+
+  .egg-overlay.shake .egg-chat {
+    animation: shakeIt .3s ease;
+  }
+  @keyframes shakeIt {
+    0%,100% { transform: translate(0, 0) rotate(0); }
+    20% { transform: translate(-6px, 4px) rotate(-1deg); }
+    40% { transform: translate(6px, -4px) rotate(1deg); }
+    60% { transform: translate(-5px, -3px) rotate(-1deg); }
+    80% { transform: translate(5px, 3px) rotate(1deg); }
+  }
+
+  /* ============ 虚空诡题 + 黑洞 ============ */
+  .void-overlay {
+    position: fixed; inset: 0;
+    background: radial-gradient(circle at 50% 50%, #120018 0%, #000 70%);
+    z-index: 2000;
+    display: none;
+    align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .void-overlay.active { display: flex; }
+
+  .void-question {
+    position: relative;
+    z-index: 2;
+    font-family: 'Courier New', 'Menlo', monospace;
+    font-size: 21px;
+    color: #a01818;
+    text-shadow:
+      0 0 8px #ff0000,
+      0 0 18px #7a0000,
+      0 0 30px #4a0000;
+    letter-spacing: 3px;
+    line-height: 2.4;
+    text-align: center;
+    padding: 0 24px;
+    max-width: 90%;
+    word-break: break-all;
+    animation: voidFlicker 0.12s infinite;
+    user-select: none;
+  }
+  @keyframes voidFlicker {
+    0%, 100% { opacity: 1; }
+    48% { opacity: 1; }
+    50% { opacity: .7; }
+    52% { opacity: 1; }
+    88% { opacity: 1; }
+    90% { opacity: .8; }
+    92% { opacity: 1; }
+  }
+
+  .blackhole {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle,
+      #000 0%,
+      #000 28%,
+      rgba(18,0,38,0.98) 45%,
+      rgba(60,0,110,0.75) 62%,
+      rgba(130,0,200,0.35) 80%,
+      rgba(190,80,255,0) 100%);
+    box-shadow:
+      0 0 60px 30px rgba(0,0,0,1),
+      0 0 120px 60px rgba(80,0,140,0.35),
+      inset 0 0 40px rgba(140,0,220,0.6);
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    will-change: width, height, opacity;
+  }
+  .blackhole.grow {
+    animation: holeGrow 3.4s cubic-bezier(.45,.05,.7,1) forwards;
+  }
+  @keyframes holeGrow {
+    0%   { width: 10px;  height: 10px;  opacity: 0; }
+    8%   { width: 30px;  height: 30px;  opacity: 1; }
+    25%  { width: 80px;  height: 80px;  opacity: 1; }
+    50%  { width: 220px; height: 220px; opacity: 1; }
+    75%  { width: 560px; height: 560px; opacity: 1; }
+    100% { width: 3600px; height: 3600px; opacity: 1; }
+  }
 </style>
 </head>
 <body>
@@ -212,7 +390,6 @@
 
 <div class="app">
 
-  <!-- 开始页 -->
   <div class="screen active" id="start-screen">
     <div class="hero">
       <div class="hero-tag">🍊 1元/份 · 每人限购5份</div>
@@ -226,7 +403,6 @@
     <button class="btn" id="start-btn">开 始 测 试</button>
   </div>
 
-  <!-- 答题页 -->
   <div class="screen" id="quiz-screen">
     <div class="progress-wrap">
       <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
@@ -236,7 +412,6 @@
     <div id="options"></div>
   </div>
 
-  <!-- 结果页 -->
   <div class="screen" id="result-screen">
     <div class="result-header">
       <div class="result-emoji" id="r-emoji">🍊</div>
@@ -245,16 +420,9 @@
     </div>
     <p class="result-desc" id="r-desc"></p>
 
-    <!-- 普通口味评论区 -->
     <div class="comments" id="comments">
-      <div class="comments-title">大 家 都 说</div>
+      <div class="comments-title">员 工 评 价</div>
       <div id="comment-list"></div>
-    </div>
-
-    <!-- 灼石彩蛋专属 -->
-    <div class="egg-box" id="egg-box">
-      <p><span>♟️</span> 这又是哪里冒出来的？？？</p>
-      <p><span>👑</span> 遗忘是件好事</p>
     </div>
 
     <div class="bars-title">灵 魂 成 分 表</div>
@@ -267,15 +435,27 @@
 
 </div>
 
+<!-- 灼石弹窗 -->
+<div class="egg-overlay" id="egg-overlay">
+  <div class="egg-chat" id="egg-chat">
+    <div class="egg-chat-title">好 劲 水 · 内 部 群 聊</div>
+    <div class="egg-messages" id="egg-messages"></div>
+    <div class="egg-hint" id="egg-hint">点击任意处关闭</div>
+  </div>
+</div>
+
+<!-- 虚空诡题 + 黑洞 -->
+<div class="void-overlay" id="void-overlay">
+  <div class="void-question" id="void-question">你​̪̩̟̋́̍̚想​̢̨̣̼̲̟̃要​̡̭̜̺̽̋͂回​̵͍̭͉̆̕̕到​̵̡͚̟̗̽̏2​̡͈̙̖̊̆́0​̷̡̲̙̪̃͢1​̟̘̱̎̀̿̍3​̵͚͓̲̺͉̺年​̪̭̽̔̍̽͟吗。</div>
+  <div class="blackhole" id="blackhole"></div>
+</div>
+
 <script>
 /* ============ 口味设定 ============ */
 const TYPES = {
   peach: {
-    emoji: '🍑',
-    name: '桃子味',
-    tag: '粉嘟嘟的软糖精',
-    color: '#ff9eb5',
-    desc: '你是一瓶行走的桃子汽水。看见小猫会"嘤"，看见小狗会"嘤嘤"。你的存在就是在给这个世界加甜味剂。不过有时候甜过头了，别人会怀疑你是不是加了糖精。',
+    emoji: '🍑', name: '桃子味', tag: '粉嘟嘟的软糖精', color: '#ff9eb5',
+    desc: '你是一瓶行走的桃子汽水。看见小猫会“嘤”，看见小狗会“嘤嘤”。你的存在就是在给这个世界加甜味剂。不过有时候甜过头了，别人会怀疑你是不是加了糖精。',
     comments: [
       { e: '❤️', t: '哇哇哇！桃子味！我最喜欢桃子味了！甜甜的，像在喝粉色的云朵～' },
       { e: '☁️', t: '桃子味口感柔和，甜度适中，包装完好，已列入本月采购清单。' },
@@ -284,10 +464,7 @@ const TYPES = {
     ]
   },
   blueberry: {
-    emoji: '🫐',
-    name: '蓝莓味',
-    tag: '忧郁的紫色气泡',
-    color: '#6b8cff',
+    emoji: '🫐', name: '蓝莓味', tag: '忧郁的紫色气泡', color: '#6b8cff',
     desc: '你的气质是冷的，心是紫的。你话不多，但每一句都能把人噎住。你喝好劲水从来不加冰，因为你觉得自己的内心已经够凉了。',
     comments: [
       { e: '❤️', t: '蓝莓味好有气质呀！喝的时候感觉自己像在拍文艺片～' },
@@ -297,10 +474,7 @@ const TYPES = {
     ]
   },
   grape: {
-    emoji: '🍇',
-    name: '葡萄味',
-    tag: '聚会里最先被顺走的那瓶',
-    color: '#a855f7',
+    emoji: '🍇', name: '葡萄味', tag: '聚会里最先被顺走的那瓶', color: '#a855f7',
     desc: '你很圆滑，很合群，很普通，但你就是聚会上最不能缺的那一瓶。你可能不是最抢眼的，但最后大家发现，还是你最好喝。',
     comments: [
       { e: '❤️', t: '葡萄味圆圆的，像一颗颗小弹珠，好可爱呀！' },
@@ -310,10 +484,7 @@ const TYPES = {
     ]
   },
   apple: {
-    emoji: '🍏',
-    name: '青苹果味',
-    tag: '酸到皱眉但很上头',
-    color: '#4ade80',
+    emoji: '🍏', name: '青苹果味', tag: '酸到皱眉但很上头', color: '#4ade80',
     desc: '你是一瓶酸涩的气泡水。你元气满满，但经常因为用力过猛而把自己酸到。你的生活态度是：虽然会皱眉，但还是要一口闷。',
     comments: [
       { e: '❤️', t: '青苹果味酸酸的，喝完感觉整个人都醒过来了！' },
@@ -323,11 +494,8 @@ const TYPES = {
     ]
   },
   orange: {
-    emoji: '🍊',
-    name: '桔子味',
-    tag: '就是普通桔子味，你被骗了',
-    color: '#ff7a30',
-    desc: '你是一个实在人。你不整那些花里胡哨的，你就是普通的桔子味。有人评价你"就是普通桔子味汽水，哪来的好劲？"——你说得对，1块钱你还想要什么自行车。',
+    emoji: '🍊', name: '桔子味', tag: '就是普通桔子味，你被骗了', color: '#ff7a30',
+    desc: '你是一个实在人。你不整那些花里胡哨的，你就是普通的桔子味。有人评价你“就是普通桔子味汽水，哪来的好劲？”——你说得对，1块钱你还想要什么自行车。',
     comments: [
       { e: '❤️', t: '桔子味是经典呀！就是那种小时候的味道，好怀念～' },
       { e: '☁️', t: '桔子味性价比最高，1块钱，朴实无华，已推荐给全部门采购。' },
@@ -336,10 +504,7 @@ const TYPES = {
     ]
   },
   hotpot: {
-    emoji: '🌶️',
-    name: '川味火锅味',
-    tag: '喝一口直接喷火',
-    color: '#ef4444',
+    emoji: '🌶️', name: '川味火锅味', tag: '喝一口直接喷火', color: '#ef4444',
     desc: '你是一瓶极度危险的饮料。你热情、奔放、不讲道理，好兄弟喝了你直接当场喷火。建议搭配灭火器食用，或者别喝。',
     comments: [
       { e: '❤️', t: '川味火锅味好辣呀！喝完脸都红了，但是好爽好爽！' },
@@ -349,10 +514,7 @@ const TYPES = {
     ]
   },
   stone: {
-    emoji: '🌑',
-    name: '灼石味',
-    tag: '？？？',
-    color: '#555555',
+    emoji: '🌑', name: '灼石味', tag: '？？？', color: '#555555',
     desc: '这瓶饮料不该出现在这里。它的包装是黑色的，上面什么也没写。你喝了它，然后你忘记了它是什么味道，甚至忘记了你是谁。',
     comments: []
   }
@@ -361,96 +523,134 @@ const TYPES = {
 /* ============ 题库 ============ */
 const questions = [
   {
-    q: '早上醒来，你发现自己变成了一瓶好劲水。你希望是？',
+    q: '朋友发来一条 60 秒语音方阵，你的第一反应是？',
     options: [
-      { t: '粉嘟嘟水蜜桃，一开口就冒粉红泡泡', k: 'peach' },
-      { t: '忧郁深紫色蓝莓，看谁都像欠你钱', k: 'blueberry' },
-      { t: '圆溜溜的葡萄，滚到哪里都能混', k: 'grape' },
-      { t: '酸到皱眉的青苹果，一口下去整个人都醒了', k: 'apple' },
-      { t: '经典老字号桔子，朴实无华且1块钱', k: 'orange' },
-      { t: '沸腾的红油火锅，喝一口直接喷火', k: 'hotpot' }
+      { t: '点开，一边听一边露出姨母笑', k: 'peach' },
+      { t: '转文字，看完冷笑一声', k: 'blueberry' },
+      { t: '先回个表情包，然后等会儿再听', k: 'grape' },
+      { t: '直接打电话过去问“什么事？”', k: 'apple' },
+      { t: '回“好的”，然后没听', k: 'orange' },
+      { t: '发语音回去，比他还长', k: 'hotpot' },
+      { t: '点开听了，但听完忘了是谁发的', k: 'stone' }
     ]
   },
   {
-    q: '好兄弟喝完一瓶好劲水，说"不够劲"。你会？',
+    q: '你在群里发了一条消息，过了十分钟没人回，你会？',
     options: [
-      { t: '再给他开一瓶桃子的，让他甜死', k: 'peach' },
-      { t: '用蓝莓味的眼神冷冷看他一眼', k: 'blueberry' },
-      { t: '叫上一群兄弟，把葡萄味的都开了', k: 'grape' },
-      { t: '直接对瓶吹，说"这才叫劲！"', k: 'apple' },
-      { t: '告诉他"这就是普通桔子味，你被骗了"', k: 'orange' },
-      { t: '往里面加朝天椒，让他知道什么叫劲', k: 'hotpot' }
+      { t: '发个可爱的表情包缓解尴尬', k: 'peach' },
+      { t: '默默撤回，当无事发生', k: 'blueberry' },
+      { t: '再发一条“有人吗？”', k: 'grape' },
+      { t: '直接 @所有人', k: 'apple' },
+      { t: '无所谓，反正也没人找我', k: 'orange' },
+      { t: '开始刷屏，直到有人理我', k: 'hotpot' }
     ]
   },
   {
-    q: '你喝下好劲水，打了个嗝。这个嗝的声音是？',
+    q: '外卖小哥打电话说“你的外卖到了，放门口了”，你？',
     options: [
-      { t: '"啾~"', k: 'peach' },
-      { t: '没有声音，因为酷的人不打嗝', k: 'blueberry' },
-      { t: '"嗝~~~~~~~~"（很长的普通嗝）', k: 'grape' },
-      { t: '"咳咳咳！"（酸到呛住）', k: 'apple' },
-      { t: '"嗝。"（很标准的桔子味嗝）', k: 'orange' },
-      { t: '喷出三米火焰', k: 'hotpot' }
+      { t: '温柔地说“好的，谢谢，辛苦了”', k: 'peach' },
+      { t: '嗯一声，挂断，等五分钟再开门', k: 'blueberry' },
+      { t: '先看猫眼，确认没人再开门', k: 'grape' },
+      { t: '立刻冲出去，因为饿疯了', k: 'apple' },
+      { t: '回“好的”，然后继续躺五分钟', k: 'orange' },
+      { t: '打开门，发现小哥还在，对视三秒', k: 'hotpot' },
+      { t: '开门拿了外卖，然后忘了自己点过', k: 'stone' }
     ]
   },
   {
-    q: '你看到一条评价："不知道为什么会是燃烧秸秆味，不难喝。" 你会？',
+    q: '你发现一个朋友发了朋友圈，但没有回你昨天的消息，你会？',
     options: [
-      { t: '觉得他好可怜，想抱抱他', k: 'peach' },
-      { t: '觉得他是个哲学家，陷入了沉思', k: 'blueberry' },
-      { t: '反手就是一个赞，然后自己也买一瓶', k: 'grape' },
-      { t: '骂他骗子，明明就是普通桔子味', k: 'apple' },
-      { t: '表示理解，毕竟一分钱一分货', k: 'orange' },
-      { t: '写下更夸张的评测："喝完我看见了宇宙"', k: 'hotpot' }
+      { t: '觉得他可能太忙了，理解', k: 'peach' },
+      { t: '记在心里，下次也不回他', k: 'blueberry' },
+      { t: '给他朋友圈点个赞，提醒他', k: 'grape' },
+      { t: '直接评论“你为什么不回我消息”', k: 'apple' },
+      { t: '算了，无所谓', k: 'orange' },
+      { t: '私聊他“你什么意思？”', k: 'hotpot' }
     ]
   },
   {
-    q: '如果货架最底层出现了一瓶黑色的、写着"???"的饮料，你会？',
+    q: '深夜两点，你突然想起十年前的一件尴尬事，你会？',
     options: [
-      { t: '不敢碰，叫老板来', k: 'peach' },
-      { t: '拿起来摇一摇，听声音', k: 'blueberry' },
-      { t: '问旁边的人："这啥？你喝过吗？"', k: 'grape' },
-      { t: '直接买下，管它是什么', k: 'apple' },
-      { t: '看保质期，确认合法合规再买', k: 'orange' },
-      { t: '一口闷', k: 'hotpot' },
-      { t: '一口闷，然后忘了自己在哪里，忘了自己是谁。', k: 'stone' }
+      { t: '把自己埋进被子里，小声尖叫', k: 'peach' },
+      { t: '面无表情地翻个身，继续想', k: 'blueberry' },
+      { t: '打开手机，给朋友发“你睡了吗”', k: 'grape' },
+      { t: '坐起来，骂自己一句，然后睡不着了', k: 'apple' },
+      { t: '想了三秒，然后忘了', k: 'orange' },
+      { t: '开始给那个当事人发消息道歉', k: 'hotpot' },
+      { t: '想不起来是什么事了', k: 'stone' }
     ]
   },
   {
-    q: '好劲水限购5份，你只能买5瓶。你怎么分配口味？',
+    q: '如果让你选一个超能力，你选？',
     options: [
-      { t: '5瓶全买桃子，因为可爱', k: 'peach' },
-      { t: '买1瓶蓝莓，其他4瓶随便', k: 'blueberry' },
-      { t: '每样来一瓶，凑个全家福', k: 'grape' },
-      { t: '5瓶全买青苹果，酸死自己', k: 'apple' },
-      { t: '5瓶全买桔子，因为性价比最高', k: 'orange' },
-      { t: '5瓶全买川味火锅，用来防身', k: 'hotpot' }
+      { t: '能让所有人开心', k: 'peach' },
+      { t: '能隐身，谁也别烦我', k: 'blueberry' },
+      { t: '能读心，但只用来猜别人想吃什么', k: 'grape' },
+      { t: '能瞬移，再也不迟到', k: 'apple' },
+      { t: '能不用睡觉', k: 'orange' },
+      { t: '能喷火', k: 'hotpot' }
     ]
   },
   {
-    q: '你在深夜emo，打开一瓶好劲水。你希望它是什么味道？',
+    q: '你在电梯里遇到一个不太熟的同事，你会？',
     options: [
-      { t: '桃子味，甜到能忘记一切烦恼', k: 'peach' },
-      { t: '蓝莓味，忧郁的紫色能懂我', k: 'blueberry' },
-      { t: '葡萄味，酸酸甜甜像初恋', k: 'grape' },
-      { t: '青苹果味，酸到流泪，就当哭过了', k: 'apple' },
-      { t: '桔子味，平平淡淡才是真', k: 'orange' },
-      { t: '川味火锅味，辣到没空emo', k: 'hotpot' }
+      { t: '微笑点头，说“早啊”', k: 'peach' },
+      { t: '假装看手机，希望他没看见我', k: 'blueberry' },
+      { t: '随便聊两句天气', k: 'grape' },
+      { t: '大声说“你今天穿得真好看！”', k: 'apple' },
+      { t: '点头，然后看楼层数字', k: 'orange' },
+      { t: '开始讲一个冷笑话', k: 'hotpot' },
+      { t: '忘了自己要去几楼', k: 'stone' }
     ]
   },
   {
-    q: '现在，请诚实地面对自己：你喝完这瓶好劲水后，最可能发生的事情是？',
+    q: '你点的奶茶等了半小时，店员说“马上好”，你会？',
     options: [
-      { t: '变成一只粉色泡泡，飘走了', k: 'peach' },
-      { t: '陷入沉默，望着远方发呆', k: 'blueberry' },
-      { t: '打了个嗝，然后继续刷手机', k: 'grape' },
-      { t: '精神抖擞，准备去跑马拉松', k: 'apple' },
-      { t: '觉得花1块钱买这瓶水，挺值的', k: 'orange' },
-      { t: '喷火，然后被消防队带走', k: 'hotpot' },
-      { t: '你看着空瓶，脑海中一片空白。你不记得水是什么味道，不记得自己是谁，也不记得刚才发生了什么。', k: 'stone' }
+      { t: '说“没关系，慢慢来”', k: 'peach' },
+      { t: '面无表情地站着，内心已经走了', k: 'blueberry' },
+      { t: '说“好的”，然后继续刷手机', k: 'grape' },
+      { t: '说“那我不等了”', k: 'apple' },
+      { t: '继续等，反正也没事', k: 'orange' },
+      { t: '开始和店员聊天，问他一天做多少杯', k: 'hotpot' }
     ]
   }
 ];
+
+/* ============ 员工随机评论池 ============ */
+const STAFF_REPLIES = {
+  '❤️': [
+    '纳尼！居然会有这种回答？？',
+    '我选这个，你不选吗？',
+    '好有意思啊，那我选这个吧！',
+    '嘻嘻。',
+    '你难道不喜欢这样的结局吗？',
+    '选这个这个，可以吗？'
+  ],
+  '☁️': [
+    '我可能也会选这个',
+    '这个真的是你想选的吗',
+    我喜欢桔子味的好劲水',
+    'mimimimimimimi',
+    '其实我根本不喜欢喝碳酸饮料',
+    '来吧我命定的好劲水！'
+  ],
+  '♟️': [
+    '反正都一样。',
+    '随便啦，无所谓。',
+    '嗯……还行吧。',
+    '不知道，反正我选它。',
+    '嗯。（没有更多补充）',
+    '行吧，下一题。'
+  ],
+  '⚡': [
+    '这个？为什么？我也不知道！',
+    '我也选这个！等等，这是什么？',
+    '哈哈哈哈哈哈……',
+    '啊？这题在问什么？',
+    '我刚刚是不是选了两次？',
+    '等等，题目呢？'
+  ]
+};
 
 /* ============ 状态 ============ */
 let idx = 0;
@@ -464,7 +664,6 @@ const progressFill = document.getElementById('progress-fill');
 const progressNum  = document.getElementById('progress-num');
 const qText        = document.getElementById('q-text');
 const optionsEl    = document.getElementById('options');
-const eggBox       = document.getElementById('egg-box');
 const commentsBox  = document.getElementById('comments');
 const commentList  = document.getElementById('comment-list');
 
@@ -494,6 +693,15 @@ function renderQuestion() {
   });
 }
 
+/* ============ 生成员工气泡 ============ */
+function pickStaffReply() {
+  const emojis = ['❤️', '☁️', '♟️', '⚡'];
+  const e = emojis[Math.floor(Math.random() * emojis.length)];
+  const pool = STAFF_REPLIES[e];
+  const t = pool[Math.floor(Math.random() * pool.length)];
+  return { e, t };
+}
+
 /* ============ 选择答案 ============ */
 let locked = false;
 function choose(key, btn) {
@@ -505,6 +713,16 @@ function choose(key, btn) {
   optionsEl.querySelectorAll('.option').forEach(b => b.disabled = true);
   progressFill.style.width = ((idx + 1) / questions.length * 100) + '%';
 
+  const reply = pickStaffReply();
+  const bubble = document.createElement('div');
+  bubble.className = 'staff-bubble';
+  bubble.innerHTML = '<span class="sb-emoji">' + reply.e + '</span><span class="sb-text">' + reply.t + '</span>';
+  btn.insertAdjacentElement('afterend', bubble);
+
+  requestAnimationFrame(() => {
+    bubble.classList.add('show');
+  });
+
   setTimeout(() => {
     idx++;
     locked = false;
@@ -514,47 +732,79 @@ function choose(key, btn) {
       void quizScreen.offsetWidth;
       quizScreen.style.animation = '';
     } else {
-      showResult();
+      const isStone = willBeStone();
+      if (isStone) {
+        playVoidAndResult();
+      } else {
+        showResult();
+      }
     }
-  }, 340);
+  }, 1600);
+}
+
+/* ============ 判断是否是灼石 ============ */
+function willBeStone() {
+  const normalKeys = ['peach', 'blueberry', 'grape', 'apple', 'orange', 'hotpot'];
+  const max = Math.max(...normalKeys.map(k => scores[k]));
+  return scores.stone > max;
+}
+
+/* ============ 虚空画面 + 黑洞 ============ */
+function playVoidAndResult() {
+  const overlay = document.getElementById('void-overlay');
+  const hole    = document.getElementById('blackhole');
+
+  hole.classList.remove('grow');
+  hole.style.width = '10px';
+  hole.style.height = '10px';
+  hole.style.opacity = '0';
+
+  overlay.classList.add('active');
+
+  setTimeout(() => {
+    hole.classList.add('grow');
+  }, 200);
+
+  setTimeout(() => {
+    overlay.classList.remove('active');
+    showResult();
+    setTimeout(() => playStoneEgg(), 250);
+  }, 3600);
 }
 
 /* ============ 结果 ============ */
 function showResult() {
-  const keys = ['peach', 'blueberry', 'grape', 'apple', 'orange', 'hotpot'];
-  const max = Math.max(...keys.map(k => scores[k]));
-  const top = keys.filter(k => scores[k] === max);
+  const normalKeys = ['peach', 'blueberry', 'grape', 'apple', 'orange', 'hotpot'];
+  const max = Math.max(...normalKeys.map(k => scores[k]));
 
-  // 灼石彩蛋：只有当灼石得分严格高于所有普通口味时才触发
-  const stoneScore = scores.stone;
   let winner;
-  if (stoneScore > max) {
+  if (scores.stone > max) {
     winner = 'stone';
   } else {
+    const top = normalKeys.filter(k => scores[k] === max);
     winner = top[Math.floor(Math.random() * top.length)];
   }
 
   const data = TYPES[winner];
+  renderResult(data, normalKeys);
+  showScreen(resultScreen);
+}
 
+/* ============ 渲染结果 ============ */
+function renderResult(data, normalKeys) {
   document.getElementById('r-emoji').textContent = data.emoji;
   document.getElementById('r-name').textContent = data.name;
   document.getElementById('r-tag').textContent = '「 ' + data.tag + ' 」';
   document.getElementById('r-desc').textContent = data.desc;
 
-  // 灼石彩蛋
-  if (winner === 'stone') {
-    eggBox.classList.add('show');
-    commentsBox.style.display = 'none';
-  } else {
-    eggBox.classList.remove('show');
+  if (data.comments && data.comments.length) {
     commentsBox.style.display = 'block';
     renderComments(data.comments);
+  } else {
+    commentsBox.style.display = 'none';
   }
 
-  // 成分条（不包含 stone）
-  renderBars(keys);
-
-  showScreen(resultScreen);
+  renderBars(normalKeys);
 }
 
 /* ============ 渲染评论 ============ */
@@ -594,14 +844,412 @@ function renderBars(keys) {
   }, 120);
 }
 
+/* ============ 灼石弹窗动画 ============ */
+function playStoneEgg() {
+  const overlay  = document.getElementById('egg-overlay');
+  const chat     = document.getElementById('egg-chat');
+  const messages = document.getElementById('egg-messages');
+
+  // 清理所有上一次残留的 body 级动态元素
+  document.body.querySelectorAll('.dynamic-flyer').forEach(el => el.remove());
+  overlay.querySelectorAll('.dynamic-flyer').forEach(el => el.remove());
+
+  messages.innerHTML = '';
+  overlay.classList.remove('closable', 'shake');
+
+  overlay.style.display = 'flex';
+  void overlay.offsetWidth;
+  overlay.classList.add('show');
+
+  /* ---------- 工具函数 ---------- */
+  function addMsg(emoji, text) {
+    const div = document.createElement('div');
+    div.className = 'egg-msg';
+    div.innerHTML = '<span class="m-emoji">' + emoji + '</span><span class="m-text">' + text + '</span>';
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function makeFlyer(emoji, size) {
+    const el = document.createElement('span');
+    el.className = 'flyer dynamic-flyer';
+    el.textContent = emoji;
+    if (size) el.style.fontSize = size + 'px';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  // 发射 ➖
+  function shootMinus(fromEl, targetEl) {
+    const fr = fromEl.getBoundingClientRect();
+    const tr = targetEl.getBoundingClientRect();
+    const fx = fr.left + fr.width / 2;
+    const fy = fr.top + fr.height / 2;
+    const tx = tr.left + tr.width / 2;
+    const ty = tr.top + tr.height / 2;
+
+    const m = document.createElement('span');
+    m.className = 'dynamic-flyer';
+    m.textContent = '➖';
+    m.style.cssText = 'position:fixed;left:' + fx + 'px;top:' + fy + 'px;font-size:30px;z-index:1002;pointer-events:none;transform:translate(-50%,-50%) scale(1);opacity:1;transition:all .45s ease-in;';
+    document.body.appendChild(m);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        m.style.left = tx + 'px';
+        m.style.top = ty + 'px';
+        m.style.opacity = '0';
+        m.style.transform = 'translate(-50%,-50%) scale(1.6) rotate(720deg)';
+      });
+    });
+
+    setTimeout(() => m.remove(), 550);
+  }
+
+  // 对话气泡
+  function makeSpeechBubble(targetEl, text) {
+    const r = targetEl.getBoundingClientRect();
+    const bubble = document.createElement('div');
+    bubble.className = 'speech-bubble dynamic-flyer';
+    bubble.textContent = text;
+    bubble.style.left = (r.left + r.width / 2) + 'px';
+    bubble.style.top = (r.top - 12) + 'px';
+    document.body.appendChild(bubble);
+    void bubble.offsetWidth;
+    bubble.classList.add('show');
+    return bubble;
+  }
+
+  /* ---------- 1. 皇冠登场 ---------- */
+  const crown = makeFlyer('👑');
+  crown.style.transition = 'none';
+  crown.style.left = '50%';
+  crown.style.top = '42%';
+  crown.style.opacity = '0';
+  crown.style.transform = 'translate(-50%, -50%) scale(0.2) rotate(-40deg)';
+
+  setTimeout(() => addMsg('👑', '遗忘是件好事'), 150);
+
+  setTimeout(() => {
+    crown.style.transition = 'all .5s cubic-bezier(.2,1.5,.5,1)';
+    crown.style.opacity = '1';
+    crown.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
+  }, 700);
+
+  /* ---------- 2. 第一只霸王龙攻击 ---------- */
+  const dino1 = makeFlyer('🦖');
+  dino1.style.transition = 'none';
+  dino1.style.left = '120%';
+  dino1.style.top = '42%';
+  dino1.style.opacity = '0';
+  dino1.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
+
+  setTimeout(() => {
+    dino1.style.transition = 'all .4s ease-in';
+    dino1.style.opacity = '1';
+    dino1.style.left = '52%';
+    dino1.style.transform = 'translate(-50%, -50%) scale(1.1) rotate(-20deg)';
+  }, 1300);
+
+  setTimeout(() => {
+    overlay.classList.add('shake');
+    setTimeout(() => overlay.classList.remove('shake'), 320);
+  }, 1650);
+
+  /* ---------- 3. 霸王龙军团 ---------- */
+  const dinoPositions = [
+    { l: '-20%', t: '15%', r: '30deg' },
+    { l: '120%', t: '15%', r: '-30deg' },
+    { l: '-20%', t: '75%', r: '-30deg' },
+    { l: '120%', t: '75%', r: '30deg' },
+    { l: '50%',  t: '-20%', r: '15deg' }
+  ];
+  const dinoArmy = dinoPositions.map(pos => {
+    const d = makeFlyer('🦖');
+    d.style.transition = 'none';
+    d.style.left = pos.l;
+    d.style.top = pos.t;
+    d.style.opacity = '0';
+    d.style.transform = 'translate(-50%, -50%) scale(0.7) rotate(' + pos.r + ')';
+    return d;
+  });
+
+  setTimeout(() => {
+    dinoArmy.forEach(d => {
+      d.style.transition = 'all .4s ease-out';
+      d.style.opacity = '1';
+      d.style.left = '50%';
+      d.style.top = '42%';
+      d.style.transform = 'translate(-50%, -50%) scale(0.9) rotate(0deg)';
+    });
+  }, 2000);
+
+  setTimeout(() => {
+    overlay.classList.add('shake');
+    setTimeout(() => overlay.classList.remove('shake'), 320);
+  }, 2300);
+
+  /* ---------- 4. 皇冠暴怒变大 ---------- */
+  setTimeout(() => {
+    crown.style.transition = 'all .35s ease-out';
+    crown.style.top = '30%';
+    crown.style.transform = 'translate(-50%, -50%) scale(1.6) rotate(-8deg)';
+    crown.style.filter = 'drop-shadow(0 0 24px #ff9a44) drop-shadow(0 0 48px #ff5e00)';
+  }, 2600);
+
+  setTimeout(() => {
+    crown.style.transition = 'all .35s ease-out';
+    crown.style.transform = 'translate(-50%, -50%) scale(2.4) rotate(-12deg)';
+  }, 2900);
+
+  /* ---------- 5. 恐龙合并成巨型恐龙 ---------- */
+  setTimeout(() => {
+    dinoArmy.forEach((d) => {
+      d.style.transition = 'all .5s cubic-bezier(.3,.7,.4,1)';
+      d.style.left = '50%';
+      d.style.top = '60%';
+      d.style.transform = 'translate(-50%, -50%) scale(0.9) rotate(0deg)';
+    });
+    dino1.style.transition = 'all .5s cubic-bezier(.3,.7,.4,1)';
+    dino1.style.left = '50%';
+    dino1.style.top = '60%';
+    dino1.style.transform = 'translate(-50%, -50%) scale(0.9) rotate(0deg)';
+  }, 3200);
+
+  let mergedDino;
+  setTimeout(() => {
+    // 闪光
+    const flash = document.createElement('div');
+    flash.className = 'dynamic-flyer';
+    flash.style.cssText = 'position:fixed;left:50%;top:60%;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#ff9a44 30%,#ff0000 60%,transparent 100%);transform:translate(-50%,-50%);z-index:1002;pointer-events:none;opacity:0;';
+    document.body.appendChild(flash);
+    requestAnimationFrame(() => {
+      flash.style.transition = 'all .35s ease-out';
+      flash.style.opacity = '1';
+      flash.style.width = '200px';
+      flash.style.height = '200px';
+    });
+    setTimeout(() => {
+      flash.style.transition = 'all .35s ease-in';
+      flash.style.opacity = '0';
+      setTimeout(() => flash.remove(), 380);
+    }, 300);
+
+    // 旧恐龙淡出
+    dinoArmy.forEach(d => {
+      d.style.transition = 'all .28s ease-in';
+      d.style.opacity = '0';
+    });
+    dino1.style.transition = 'all .28s ease-in';
+    dino1.style.opacity = '0';
+
+    // 巨型恐龙出现
+    mergedDino = makeFlyer('🦖');
+    mergedDino.style.transition = 'none';
+    mergedDino.style.left = '50%';
+    mergedDino.style.top = '60%';
+    mergedDino.style.opacity = '0';
+    mergedDino.style.transform = 'translate(-50%, -50%) scale(0.5) rotate(0deg)';
+    mergedDino.style.filter = 'drop-shadow(0 0 20px #ff5e00)';
+
+    requestAnimationFrame(() => {
+      mergedDino.style.transition = 'all .45s cubic-bezier(.2,1.5,.5,1)';
+      mergedDino.style.opacity = '1';
+      mergedDino.style.transform = 'translate(-50%, -50%) scale(2.2) rotate(-8deg)';
+    });
+
+    setTimeout(() => {
+      overlay.classList.add('shake');
+      setTimeout(() => overlay.classList.remove('shake'), 340);
+    }, 380);
+  }, 3700);
+
+  /* ---------- 6. ♻️ 出来看戏 ---------- */
+  const recycle = makeFlyer('♻️', 48);
+  recycle.style.transition = 'none';
+  recycle.style.left = '92%';
+  recycle.style.top = '25%';
+  recycle.style.opacity = '0';
+  recycle.style.transform = 'translate(-50%, -50%) scale(0.5) rotate(-20deg)';
+
+  setTimeout(() => {
+    recycle.style.transition = 'all .4s cubic-bezier(.2,1.5,.5,1)';
+    recycle.style.opacity = '1';
+    recycle.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
+  }, 4200);
+
+  setTimeout(() => {
+    recycle.style.transition = 'transform .5s ease-in-out';
+    recycle.style.transform = 'translate(-50%, -50%) scale(1.08) rotate(8deg)';
+  }, 4700);
+  setTimeout(() => {
+    recycle.style.transform = 'translate(-50%, -50%) scale(1) rotate(-8deg)';
+  }, 5200);
+  setTimeout(() => {
+    recycle.style.transform = 'translate(-50%, -50%) scale(1.08) rotate(8deg)';
+  }, 5700);
+
+  /* ---------- 7. ❌ 出现，开始发射 ➖ 攻击皇冠 ---------- */
+  const cross = makeFlyer('❌', 52);
+  cross.style.transition = 'none';
+  cross.style.left = '85%';
+  cross.style.top = '55%';
+  cross.style.opacity = '0';
+  cross.style.transform = 'translate(-50%, -50%) scale(0.5) rotate(20deg)';
+
+  setTimeout(() => {
+    cross.style.transition = 'all .35s cubic-bezier(.2,1.5,.5,1)';
+    cross.style.opacity = '1';
+    cross.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
+  }, 4600);
+
+  setTimeout(() => shootMinus(cross, crown), 4900);
+  setTimeout(() => shootMinus(cross, crown), 5150);
+  setTimeout(() => shootMinus(cross, crown), 5400);
+
+  setTimeout(() => {
+    crown.style.transition = 'transform .1s ease-out';
+    crown.style.transform = 'translate(-50%, -50%) scale(2.3) rotate(-16deg)';
+    setTimeout(() => {
+      crown.style.transition = 'transform .15s ease-out';
+      crown.style.transform = 'translate(-50%, -50%) scale(2.4) rotate(-12deg)';
+    }, 110);
+  }, 5000);
+  setTimeout(() => {
+    crown.style.transition = 'transform .1s ease-out';
+    crown.style.transform = 'translate(-50%, -50%) scale(2.3) rotate(-8deg)';
+    setTimeout(() => {
+      crown.style.transition = 'transform .15s ease-out';
+      crown.style.transform = 'translate(-50%, -50%) scale(2.4) rotate(-12deg)';
+    }, 110);
+  }, 5250);
+
+  /* ---------- 8. 霸王龙冲上去打皇冠 ---------- */
+  setTimeout(() => {
+    mergedDino.style.transition = 'all .4s ease-in';
+    mergedDino.style.left = '42%';
+    mergedDino.style.top = '32%';
+    mergedDino.style.transform = 'translate(-50%, -50%) scale(2.6) rotate(-28deg)';
+  }, 5450);
+
+  setTimeout(() => {
+    overlay.classList.add('shake');
+    setTimeout(() => overlay.classList.remove('shake'), 340);
+
+    crown.style.transition = 'all .15s ease-in';
+    crown.style.left = '52%';
+    crown.style.top = '24%';
+    crown.style.transform = 'translate(-50%, -50%) scale(2.3) rotate(15deg)';
+  }, 5800);
+
+  /* ---------- 9. 皇冠弹对话框：“就这点本事？以多欺少！” ---------- */
+  let crownBubble;
+  setTimeout(() => {
+    crownBubble = makeSpeechBubble(crown, '就这点本事？以多欺少！');
+  }, 6100);
+
+  /* ---------- 10. 皇冠向左边跑，其他 emoji 一起跟着跑 ---------- */
+  setTimeout(() => {
+    if (crownBubble) crownBubble.classList.remove('show');
+
+    crown.style.transition = 'all .9s cubic-bezier(.4,.05,.6,1)';
+    crown.style.left = '-60%';
+    crown.style.top = '35%';
+    crown.style.transform = 'translate(-50%, -50%) scale(2) rotate(-540deg)';
+    crown.style.opacity = '0';
+
+    mergedDino.style.transition = 'all .9s cubic-bezier(.4,.05,.6,1)';
+    mergedDino.style.left = '-65%';
+    mergedDino.style.top = '38%';
+    mergedDino.style.transform = 'translate(-50%, -50%) scale(2) rotate(360deg)';
+    mergedDino.style.opacity = '0';
+
+    recycle.style.transition = 'all .9s cubic-bezier(.4,.05,.6,1)';
+    recycle.style.left = '-60%';
+    recycle.style.top = '30%';
+    recycle.style.transform = 'translate(-50%, -50%) scale(0.8) rotate(-720deg)';
+    recycle.style.opacity = '0';
+
+    cross.style.transition = 'all 1.1s cubic-bezier(.4,.05,.6,1)';
+    cross.style.left = '-75%';
+    cross.style.top = '55%';
+    cross.style.transform = 'translate(-50%, -50%) scale(1) rotate(-540deg)';
+  }, 6600);
+
+  setTimeout(() => shootMinus(cross, crown), 6800);
+  setTimeout(() => shootMinus(cross, crown), 7100);
+  setTimeout(() => shootMinus(cross, crown), 7400);
+
+  setTimeout(() => {
+    cross.style.opacity = '0';
+  }, 7600);
+
+  /* ---------- 11. 最左边出现 🍵 ---------- */
+  const tea = makeFlyer('🍵', 52);
+  tea.style.transition = 'none';
+  tea.style.left = '-20%';
+  tea.style.top = '50%';
+  tea.style.opacity = '0';
+  tea.style.transform = 'translate(-50%, -50%) scale(0.5) rotate(-20deg)';
+
+  setTimeout(() => {
+    tea.style.transition = 'all .5s cubic-bezier(.2,1.5,.5,1)';
+    tea.style.opacity = '1';
+    tea.style.left = '25%';
+    tea.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
+  }, 7600);
+
+  /* ---------- 12. 🍵 弹对话框：“？？？” ---------- */
+  setTimeout(() => {
+    makeSpeechBubble(tea, '？？？');
+  }, 8100);
+
+  /* ---------- 13. 🍵 也往左边跑 ---------- */
+  setTimeout(() => {
+    tea.style.transition = 'all .7s cubic-bezier(.4,.05,.6,1)';
+    tea.style.left = '-40%';
+    tea.style.top = '45%';
+    tea.style.transform = 'translate(-50%, -50%) scale(0.7) rotate(-540deg)';
+    tea.style.opacity = '0';
+  }, 8800);
+
+  /* ---------- 14. 聊天消息一条一条蹦出来 ---------- */
+  const msgs = [
+    ['❤️', '？？？'],
+    ['⚡', '刚刚飞过去了啥？我眼花了？'],
+    ['☁️', '没有吧！我也看见了'],
+    ['♟️', '没事，这只是个测试版'],
+    ['♟️', '他们应该看不到'],
+    ['♟️', '应该吧……。']
+  ];
+  msgs.forEach((m, i) => {
+    setTimeout(() => addMsg(m[0], m[1]), 9600 + i * 420);
+  });
+
+  const totalTime = 9600 + msgs.length * 420 + 300;
+  setTimeout(() => overlay.classList.add('closable'), totalTime);
+
+  // 关闭时清理所有悬浮元素（包括 body 上的气泡和飞行 emoji）
+  function closeHandler() {
+    if (!overlay.classList.contains('closable')) return;
+    overlay.classList.remove('show');
+    overlay.removeEventListener('click', closeHandler);
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      // 关键修复：同时清理 body 和 overlay 上的动态元素
+      document.body.querySelectorAll('.dynamic-flyer').forEach(el => el.remove());
+      overlay.querySelectorAll('.dynamic-flyer').forEach(el => el.remove());
+    }, 360);
+  }
+  overlay.addEventListener('click', closeHandler);
+}
+
 /* ============ 重置 ============ */
 function reset() {
   idx = 0;
   locked = false;
   Object.keys(scores).forEach(k => scores[k] = 0);
   progressFill.style.width = '0%';
-  eggBox.classList.remove('show');
-  commentsBox.style.display = 'block';
   commentList.innerHTML = '';
   showScreen(startScreen);
 }
